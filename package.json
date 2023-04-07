@@ -1,0 +1,24 @@
+{
+    "name": "college",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build:scss": "npx sass .\\css\\index.scss .\\css\\index.css"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/DragonLJH/college.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/DragonLJH/college/issues"
+    },
+    "homepage": "https://github.com/DragonLJH/college#readme",
+    "devDependencies": {
+        "sass": "^1.61.0"
+    }
+}
