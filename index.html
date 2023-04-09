@@ -11,22 +11,84 @@
 </head>
 
 <body>
-    <div id="app" class="home">
+    <div id="app" class="home-div">
         <div class="top">
-            <div class="logo ">
-                <span class="icon bangzhu">
-
-                </span>
-                <span class="icon baocun-youshangjiao">
-
-                </span>
+            <div class="logo">
+                logo
             </div>
-            <div class="main"></div>
-            <div class="operate"></div>
+            <div class="main">
+                <div class="item">
+                    <span class="icon home"></span>首页
+                </div>
+            </div>
+            <div class="operate">
+                <div class="search">
+                    <input v-model="quanwenjiansuo" type="text" placeholder="跨对象搜索">
+                    <span class="icon quanwenjiansuo"></span>
+                </div>
+                <div class="operate-main">
+                    <div class="item icon" :class="item" v-for="(item, index) in operateIcons" :key="index"></div>
+                </div>
+            </div>
         </div>
         <div class="main">
-            <div class="main-left">main-left</div>
-            <div class="main-right">main-right</div>
+            <div class="main-left">
+                <div class="item" v-for="(item, index) in leftIcons" :key="index">
+                    <div class="icon" :class="item"></div>
+                </div>
+            </div>
+            <div class="main-right">
+                <div class="item" :style='{width:"350px",height:"200px"}'>
+                    <div class="title">
+                        <div class="title-icon">
+                            <span class="icon home"></span>个人信息
+                        </div>
+                        <div class="title-operate icon shezhi"></div>
+                    </div>
+                    <div class="main">
+                        <div class="img-div">
+                            <div class="img">
+                            </div>
+                            <div class="msg">
+                                <div>
+                                    小菲，上午好！
+                                </div>
+                                <div>
+                                    最近登录时间：2022年/08/08 13:03
+                                </div>
+                                <div>
+                                    明天有暴雨，记得出门带伞噢！
+                                </div>
+                            </div>
+                        </div>
+                        <div class="progress">
+                            <div class="item">
+                                <div></div>45%(课时)
+                            </div>
+                            <div class="icon shezhi"></div>
+                        </div>
+                        <div class="icon-div">
+                            <div class="icon home"></div>
+                            <div class="msg">xxxxxxxxxxxx</div>
+                        </div>
+                        <div class="icon-div">
+                            <div class="icon home"></div>
+                            <div class="msg">xxxxxxxxxxxx</div>
+                        </div>
+                        <div class="icon-div">
+                            <div class="icon home"></div>
+                            <div class="msg">xxxxxxxxxxxx</div>
+                        </div>
+                        <div class="icon-div">
+                            <div class="icon home"></div>
+                            <div class="msg">xxxxxxxxxxxx</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item" :style='{width:"350px",height:"200px"}'>
+
+                </div>
+            </div>
         </div>
     </div>
 </body>
@@ -35,7 +97,23 @@
         el: "#app",
         data() {
             return {
-
+                quanwenjiansuo: "",
+                operateIcons: [
+                    "zaixianbangzhu", "shezhi", "lieshu", "huanfu", "suoping", "tuichu"
+                ],
+                leftIcons: [
+                    "leibie", "kehuguanli", "huodong", "wenjianjia_zhankai", "fenlei", "chanyeleibie", "jichuguanli", "zhengcepipei",
+                ],
+                mainItems: [
+                    {
+                        id: 0,
+                        title: "个人信息",
+                        style: {
+                            width: 300,
+                            height: 200,
+                        }
+                    }
+                ]
             }
         },
     })

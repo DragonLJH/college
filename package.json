@@ -5,7 +5,8 @@
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "build:scss": "npx sass .\\css\\index.scss .\\css\\index.css"
+        "build:scss:win": "npx sass .\\css\\index.scss .\\css\\index.css",
+        "build:scss:mac":"npx sass ./css/index.scss ./css/index.css"
     },
     "repository": {
         "type": "git",
