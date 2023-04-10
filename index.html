@@ -39,31 +39,91 @@
             </div>
             <div class="main-right">
                 <div class="item" :style='{width:"350px",height:"200px"}'>
+                    <div>
+                        <div class="title">
+                            <div class="title-icon">
+                                <span class="icon home"></span>
+                            </div>
+                            <div class="title-operate icon shezhi"></div>
+                        </div>
+                        <div class="main">
+                            <div class="icon-div">
+                                <div class="icon home"></div>
+                                <div class="msg">xxxxxxxxxxxx</div>
+                            </div>
+                            <div class="icon-div">
+                                <div class="icon home"></div>
+                                <div class="msg">xxxxxxxxxxxx</div>
+                            </div>
+                            <div class="icon-div">
+                                <div class="icon home"></div>
+                                <div class="msg">xxxxxxxxxxxx</div>
+                            </div>
+                            <div class="icon-div">
+                                <div class="icon home"></div>
+                                <div class="msg">xxxxxxxxxxxx</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item" v-for="(item, index) in mainItems" :key="index" :style='toPx(item.style)'>
+                    <component :is="item.is" :img-data="item.imgData" :progress="item.progress" />
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    var mixin = {
+        methods: {
+            toPx: function(obj) {
+                const newObj = {...obj
+                }
+                Object.entries(newObj).forEach(([k, v]) => {
+                    if (Object.prototype.toString.call(v) == '[object Number]') newObj[k] += "px"
+                })
+                return newObj
+            }
+        }
+    }
+    Vue.component('common-div', {
+        props: {
+            title: {
+                type: String
+            },
+            imgData: {
+                type: Object
+            },
+            progress: {
+                type: Object
+            }
+        },
+        data: function() {
+            return {}
+        },
+        template: `<div>
                     <div class="title">
                         <div class="title-icon">
-                            <span class="icon home"></span>个人信息
+                            <span class="icon home"></span>{{title}}
                         </div>
                         <div class="title-operate icon shezhi"></div>
                     </div>
                     <div class="main">
-                        <div class="img-div">
+                        <div class="img-div" v-if="imgData.show">
                             <div class="img">
                             </div>
                             <div class="msg">
-                                <div>
-                                    小菲，上午好！
-                                </div>
-                                <div>
-                                    最近登录时间：2022年/08/08 13:03
-                                </div>
-                                <div>
-                                    明天有暴雨，记得出门带伞噢！
-                                </div>
+                                <div v-for="(item, index) in imgData?.data" :key="index">
+                                    {{item}}
+                                </div> 
                             </div>
                         </div>
-                        <div class="progress">
+                        <div class="progress" v-if="progress.show">
                             <div class="item">
-                                <div></div>45%(课时)
+                                <div :style="{width: progress.pace }"></div>
+                                <span>{{progress.pace}}({{progress.name}})</span>
                             </div>
                             <div class="icon shezhi"></div>
                         </div>
@@ -83,18 +143,25 @@
                             <div class="icon home"></div>
                             <div class="msg">xxxxxxxxxxxx</div>
                         </div>
+                        <div class="icon-div">
+                            <div class="icon home"></div>
+                            <div class="msg">xxxxxxxxxxxx</div>
+                        </div>
+                        <div class="icon-div">
+                            <div class="icon home"></div>
+                            <div class="msg">xxxxxxxxxxxx</div>
+                        </div>
+                        <div class="icon-div">
+                            <div class="icon home"></div>
+                            <div class="msg">xxxxxxxxxxxx</div>
+                        </div>
                     </div>
-                </div>
-                <div class="item" :style='{width:"350px",height:"200px"}'>
+                </div>`
+    })
 
-                </div>
-            </div>
-        </div>
-    </div>
-</body>
-<script>
-    new Vue({
+    var vm = new Vue({
         el: "#app",
+        mixins: [mixin],
         data() {
             return {
                 quanwenjiansuo: "",
@@ -104,16 +171,39 @@
                 leftIcons: [
                     "leibie", "kehuguanli", "huodong", "wenjianjia_zhankai", "fenlei", "chanyeleibie", "jichuguanli", "zhengcepipei",
                 ],
-                mainItems: [
-                    {
-                        id: 0,
-                        title: "个人信息",
-                        style: {
-                            width: 300,
-                            height: 200,
-                        }
+                mainItems: [{
+                    is: "common-div",
+                    id: 0,
+                    title: "个人信息",
+                    imgData: {
+                        show: true,
+                        img: "",
+                        data: ["小菲，上午好！", "最近登录时间：2022年/08/08 13:03", "明天有暴雨，记得出门带伞噢！"]
+                    },
+                    progress: {
+                        show: true,
+                        pace: "100%",
+                        name: "课时"
+                    },
+                    style: {
+                        width: 350,
+                        height: 200,
                     }
-                ]
+                }, {
+                    is: "common-div",
+                    id: 1,
+                    title: "待办",
+                    imgData: {
+                        show: false,
+                    },
+                    progress: {
+                        show: false,
+                    },
+                    style: {
+                        width: 350,
+                        height: 200,
+                    }
+                }, ]
             }
         },
     })
