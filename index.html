@@ -48,27 +48,41 @@
                         </div>
                         <div class="main">
                             <div class="icon-div">
-                                <div class="icon home"></div>
-                                <div class="msg">xxxxxxxxxxxx</div>
+                                <div class="icon olderOpen"></div>
+                                <div class="msg">
+                                    <div class="msg-item">xxxaaaxxx</div>
+                                    <div class="msg-item">
+                                        <div>xxxaaaxxx</div>
+                                        <div>10/08 08:30</div>
+                                    </div>
+                                    <div class="msg-item">xxxaaaxxx</div>
+                                </div>
                             </div>
                             <div class="icon-div">
                                 <div class="icon home"></div>
-                                <div class="msg">xxxxxxxxxxxx</div>
+                                <div class="msg">
+                                    <div class="msg-item">xxxaaaxxx</div>
+                                </div>
                             </div>
                             <div class="icon-div">
                                 <div class="icon home"></div>
-                                <div class="msg">xxxxxxxxxxxx</div>
+                                <div class="msg">
+                                    <div class="msg-item">xxxaaaxxx</div>
+                                </div>
                             </div>
                             <div class="icon-div">
                                 <div class="icon home"></div>
-                                <div class="msg">xxxxxxxxxxxx</div>
+                                <div class="msg">
+                                    <div class="msg-item">xxxaaaxxx</div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="item" v-for="(item, index) in mainItems" :key="index" :style='toPx(item.style)'>
-                    <component :is="item.is" :img-data="item.imgData" :progress="item.progress" />
+                    <component :is="item.is" :img-data="item.imgData" :progress="item.progress" :title="item.title"
+                        :title-icon="item.titleIcon" :msg-div="item.msgDiv" />
                 </div>
 
             </div>
@@ -78,8 +92,9 @@
 <script>
     var mixin = {
         methods: {
-            toPx: function(obj) {
-                const newObj = {...obj
+            toPx: function (obj) {
+                const newObj = {
+                    ...obj
                 }
                 Object.entries(newObj).forEach(([k, v]) => {
                     if (Object.prototype.toString.call(v) == '[object Number]') newObj[k] += "px"
@@ -93,20 +108,26 @@
             title: {
                 type: String
             },
+            titleIcon: {
+                type: String
+            },
             imgData: {
                 type: Object
             },
             progress: {
                 type: Object
+            },
+            msgDiv: {
+                type: Array
             }
         },
-        data: function() {
+        data: function () {
             return {}
         },
         template: `<div>
                     <div class="title">
                         <div class="title-icon">
-                            <span class="icon home"></span>{{title}}
+                            <span class="icon" :class="titleIcon"></span>{{title}}
                         </div>
                         <div class="title-operate icon shezhi"></div>
                     </div>
@@ -127,33 +148,15 @@
                             </div>
                             <div class="icon shezhi"></div>
                         </div>
-                        <div class="icon-div">
-                            <div class="icon home"></div>
-                            <div class="msg">xxxxxxxxxxxx</div>
-                        </div>
-                        <div class="icon-div">
-                            <div class="icon home"></div>
-                            <div class="msg">xxxxxxxxxxxx</div>
-                        </div>
-                        <div class="icon-div">
-                            <div class="icon home"></div>
-                            <div class="msg">xxxxxxxxxxxx</div>
-                        </div>
-                        <div class="icon-div">
-                            <div class="icon home"></div>
-                            <div class="msg">xxxxxxxxxxxx</div>
-                        </div>
-                        <div class="icon-div">
-                            <div class="icon home"></div>
-                            <div class="msg">xxxxxxxxxxxx</div>
-                        </div>
-                        <div class="icon-div">
-                            <div class="icon home"></div>
-                            <div class="msg">xxxxxxxxxxxx</div>
-                        </div>
-                        <div class="icon-div">
-                            <div class="icon home"></div>
-                            <div class="msg">xxxxxxxxxxxx</div>
+                        <div class="icon-div" v-for="(item, index) in msgDiv" :key="index" >
+                            <div class="icon " :class="item.icon"></div>
+                            <div class="msg">
+                                    <div class="msg-item">{{item.msg.title}}</div>
+                                    <div class="msg-item"  v-for="(val, index) in item.msg.data" :key="index">
+                                        <div>{{val.text}}</div>
+                                        <div>{{val.time}}</div>
+                                    </div>
+                                </div>
                         </div>
                     </div>
                 </div>`
@@ -169,12 +172,13 @@
                     "zaixianbangzhu", "shezhi", "lieshu", "huanfu", "suoping", "tuichu"
                 ],
                 leftIcons: [
-                    "leibie", "kehuguanli", "huodong", "wenjianjia_zhankai", "fenlei", "chanyeleibie", "jichuguanli", "zhengcepipei",
+                    "leibie", "kehuguanli", "huodong", "wenjianjia_zhankai", "fenlei", "chanyeleibie", "jichuguanli", "zhengcepipei"
                 ],
                 mainItems: [{
                     is: "common-div",
                     id: 0,
                     title: "个人信息",
+                    titleIcon: "cuiban",
                     imgData: {
                         show: true,
                         img: "",
@@ -182,9 +186,28 @@
                     },
                     progress: {
                         show: true,
-                        pace: "100%",
+                        pace: "40%",
                         name: "课时"
                     },
+                    msgDiv: [{
+                        icon: "huiyi",
+                        msg: {
+                            title: "《关于公司全面预算规划会议》",
+                            data: []
+                        }
+                    }, {
+                        icon: "yikatong",
+                        msg: {
+                            title: "一卡通余额:**************",
+                            data: []
+                        }
+                    }, {
+                        icon: "wangzhan",
+                        msg: {
+                            title: "个人网站:xxx.xxx.xxx",
+                            data: []
+                        }
+                    },],
                     style: {
                         width: 350,
                         height: 200,
@@ -193,6 +216,7 @@
                     is: "common-div",
                     id: 1,
                     title: "待办",
+                    titleIcon: "daiban",
                     imgData: {
                         show: false,
                     },
@@ -202,8 +226,37 @@
                     style: {
                         width: 350,
                         height: 200,
-                    }
-                }, ]
+                    },
+                    msgDiv: [{
+                        icon: "huiyi",
+                        msg: {
+                            title: "《关于公司全面预算规划会议》",
+                            data: []
+                        }
+                    }, {
+                        icon: "yikatong",
+                        msg: {
+                            title: "一卡通余额:**************",
+                            data: []
+                        }
+                    }, {
+                        icon: "wangzhan",
+                        msg: {
+                            title: "个人网站:xxx.xxx.xxx",
+                            data: []
+                        }
+                    }, {
+                        icon: "olderOpen",
+                        msg: {
+                            title: "被退回",
+                            data: [
+                                { text: "项目立项申请", time: "08/10 18:12" },
+                                { text: "报销申请", time: "08/10 18:12" },
+                                { text: "资产领用申请", time: "08/10 18:12" }
+                            ]
+                        }
+                    },],
+                },]
             }
         },
     })
