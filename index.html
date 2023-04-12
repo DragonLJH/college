@@ -48,7 +48,7 @@
                         </div>
                         <div class="main">
                             <div class="icon-div">
-                                <div class="icon olderOpen"></div>
+                                <div class="icon olderOpen" data-num="10"></div>
                                 <div class="msg">
                                     <div class="msg-item">xxxaaaxxx</div>
                                     <div class="msg-item">
@@ -149,7 +149,7 @@
                             <div class="icon shezhi"></div>
                         </div>
                         <div class="icon-div" v-for="(item, index) in msgDiv" :key="index" >
-                            <div class="icon " :class="item.icon"></div>
+                            <div class="icon " :class="item.icon" :data-num="item.msg.data.length?item.msg.data.length:''"></div>
                             <div class="msg">
                                     <div class="msg-item">{{item.msg.title}}</div>
                                     <div class="msg-item"  v-for="(val, index) in item.msg.data" :key="index">
@@ -228,22 +228,11 @@
                         height: 200,
                     },
                     msgDiv: [{
-                        icon: "huiyi",
+                        icon: "folderShare",
                         msg: {
-                            title: "《关于公司全面预算规划会议》",
-                            data: []
-                        }
-                    }, {
-                        icon: "yikatong",
-                        msg: {
-                            title: "一卡通余额:**************",
-                            data: []
-                        }
-                    }, {
-                        icon: "wangzhan",
-                        msg: {
-                            title: "个人网站:xxx.xxx.xxx",
-                            data: []
+                            title: "草稿",
+                            data: [
+                            ]
                         }
                     }, {
                         icon: "olderOpen",

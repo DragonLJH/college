@@ -179,10 +179,22 @@ body {
   align-items: flex-start;
   color: #666;
 }
-.home-div > .main > .main-right > .item > div > .main .icon-div .icon {
+.home-div > .main > .main-right > .item > div > .main .icon-div > .icon {
+  position: relative;
   width: 18px;
   height: 18px;
   margin: 5px;
+}
+.home-div > .main > .main-right > .item > div > .main .icon-div > .icon::after {
+  content: attr(data-num);
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  font-size: 12px;
+  color: #fff;
+  text-align: center;
+  transform: scale(0.8);
 }
 .home-div > .main > .main-right > .item > div > .main .icon-div .msg {
   width: 100%;

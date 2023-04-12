@@ -173,10 +173,22 @@ $home-top-background-color: #444;
                             display: flex;
                             align-items: flex-start;
                             color: #666;
-                            .icon {
+                            >.icon {
+                                position: relative;
                                 width: 18px;
                                 height: 18px;
                                 margin: 5px;
+                                &::after{
+                                    content: attr(data-num);
+                                    position: absolute;
+                                    left: 0;
+                                    bottom: 0;
+                                    width: 100%;
+                                    font-size: 12px;
+                                    color: #fff;
+                                    text-align: center;
+                                    transform: scale(0.8);
+                                }
                             }
                             .msg {
                                 width: 100%;
