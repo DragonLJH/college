@@ -42,47 +42,23 @@
                     <div>
                         <div class="title">
                             <div class="title-icon">
-                                <span class="icon home"></span>
+                                <span class="icon kuaijiefangwen"></span>
                             </div>
                             <div class="title-operate icon shezhi"></div>
                         </div>
-                        <div class="main">
-                            <div class="icon-div">
-                                <div class="icon olderOpen" data-num="10"></div>
-                                <div class="msg">
-                                    <div class="msg-item">xxxaaaxxx</div>
-                                    <div class="msg-item">
-                                        <div>xxxaaaxxx</div>
-                                        <div>10/08 08:30</div>
-                                    </div>
-                                    <div class="msg-item">xxxaaaxxx</div>
+                        <div class="main icons">
+                            <div class="icons-item">
+                                <div>
+                                    <div class="icon qingjia"></div>
                                 </div>
-                            </div>
-                            <div class="icon-div">
-                                <div class="icon home"></div>
-                                <div class="msg">
-                                    <div class="msg-item">xxxaaaxxx</div>
-                                </div>
-                            </div>
-                            <div class="icon-div">
-                                <div class="icon home"></div>
-                                <div class="msg">
-                                    <div class="msg-item">xxxaaaxxx</div>
-                                </div>
-                            </div>
-                            <div class="icon-div">
-                                <div class="icon home"></div>
-                                <div class="msg">
-                                    <div class="msg-item">xxxaaaxxx</div>
-                                </div>
+                                <div>请假</div>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="item" v-for="(item, index) in mainItems" :key="index" :style='toPx(item.style)'>
-                    <component :is="item.is" :img-data="item.imgData" :progress="item.progress" :title="item.title"
-                        :title-icon="item.titleIcon" :msg-div="item.msgDiv" />
+                    <component :is="item.is" :img-data="item.imgData" :progress="item.progress" :title="item.title" :title-icon="item.titleIcon" :msg-div="item.msgDiv" />
                 </div>
 
             </div>
@@ -92,7 +68,7 @@
 <script>
     var mixin = {
         methods: {
-            toPx: function (obj) {
+            toPx: function(obj) {
                 const newObj = {
                     ...obj
                 }
@@ -103,6 +79,47 @@
             }
         }
     }
+    var mixinSetting = {
+        methods: {
+            mixinSetting: function(data) {
+                console.log("mixinSetting", data)
+            }
+        }
+    }
+    Vue.component('kjfw-div', {
+        props: {
+            title: {
+                type: String
+            },
+            titleIcon: {
+                type: String
+            },
+        },
+        mixins: [mixinSetting],
+        data: function() {
+            return {}
+        },
+        methods: {},
+        mounted() {},
+        template: `
+                    <div>
+                        <div class="title">
+                            <div class="title-icon">
+                                <span class="icon" :class="titleIcon"></span>{{title}}
+                            </div>
+                            <div class="title-operate icon shezhi" @click="mixinSetting('123')"></div>
+                        </div>
+                        <div class="main icons">
+                            <div class="icons-item">
+                                <div>
+                                    <div class="icon qingjia"></div>
+                                </div>
+                                <div>请假</div>
+                            </div>
+                        </div>
+                    </div>`
+
+    })
     Vue.component('common-div', {
         props: {
             title: {
@@ -121,15 +138,34 @@
                 type: Array
             }
         },
-        data: function () {
-            return {}
+        mixins: [mixinSetting],
+        data: function() {
+            return {
+                commonMsgDiv: []
+            }
+        },
+        methods: {
+            iconClick(index) {
+                let item = JSON.parse(JSON.stringify(this.commonMsgDiv[index]))
+                if (!item.isGroup) return
+                item.active = !item.active
+                if (item.active) {
+                    item.icon = item.AIcon
+                } else {
+                    item.icon = item.unAIcon
+                }
+                this.$set(this.commonMsgDiv, index, item)
+            }
+        },
+        mounted() {
+            this.commonMsgDiv = JSON.parse(JSON.stringify(this.msgDiv))
         },
         template: `<div>
                     <div class="title">
                         <div class="title-icon">
                             <span class="icon" :class="titleIcon"></span>{{title}}
                         </div>
-                        <div class="title-operate icon shezhi"></div>
+                            <div class="title-operate icon shezhi" @click="mixinSetting('123')"></div>
                     </div>
                     <div class="main">
                         <div class="img-div" v-if="imgData.show">
@@ -148,15 +184,18 @@
                             </div>
                             <div class="icon shezhi"></div>
                         </div>
-                        <div class="icon-div" v-for="(item, index) in msgDiv" :key="index" >
-                            <div class="icon " :class="item.icon" :data-num="item.msg.data.length?item.msg.data.length:''"></div>
+                        <div class="icon-div" v-for="(item, index) in commonMsgDiv" :key="index" >
+                            <div @click="iconClick(index)" class="icon " :class="item.icon" :data-num="item.msg.data.length?item.msg.data.length:''"></div>
                             <div class="msg">
-                                    <div class="msg-item">{{item.msg.title}}</div>
-                                    <div class="msg-item"  v-for="(val, index) in item.msg.data" :key="index">
-                                        <div>{{val.text}}</div>
-                                        <div>{{val.time}}</div>
-                                    </div>
+                                <div class="msg-item">
+                                    <div>{{item.msg.title}}</div>
+                                    <div>{{item.msg.time}}</div>
                                 </div>
+                                <div v-show="item.isGroup && item.active" class="msg-item"  v-for="(val, index) in item.msg.data" :key="index">
+                                    <div>{{val.text}}</div>
+                                    <div>{{val.time}}</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>`
@@ -193,21 +232,24 @@
                         icon: "huiyi",
                         msg: {
                             title: "《关于公司全面预算规划会议》",
+                            time: "08/10 18:12",
                             data: []
                         }
                     }, {
                         icon: "yikatong",
                         msg: {
                             title: "一卡通余额:**************",
+                            time: "08/10 18:12",
                             data: []
                         }
                     }, {
                         icon: "wangzhan",
                         msg: {
                             title: "个人网站:xxx.xxx.xxx",
+                            time: "08/10 18:12",
                             data: []
                         }
-                    },],
+                    }, ],
                     style: {
                         width: 350,
                         height: 200,
@@ -228,24 +270,55 @@
                         height: 200,
                     },
                     msgDiv: [{
+                        isGroup: false,
                         icon: "folderShare",
                         msg: {
                             title: "草稿",
-                            data: [
-                            ]
+                            time: "08/10 18:12",
+                            data: []
                         }
                     }, {
+                        isGroup: true,
                         icon: "olderOpen",
+                        active: true,
+                        unAIcon: "folderShare",
+                        AIcon: "olderOpen",
                         msg: {
                             title: "被退回",
-                            data: [
-                                { text: "项目立项申请", time: "08/10 18:12" },
-                                { text: "报销申请", time: "08/10 18:12" },
-                                { text: "资产领用申请", time: "08/10 18:12" }
-                            ]
+                            time: "08/10 18:12",
+                            data: [{
+                                text: "项目立项申请",
+                                time: "08/10 18:12"
+                            }, {
+                                text: "报销申请",
+                                time: "08/10 18:12"
+                            }, {
+                                text: "资产领用申请",
+                                time: "08/10 18:12"
+                            }]
                         }
-                    },],
-                },]
+                    }, {
+                        isGroup: true,
+                        icon: "folderShare",
+                        active: false,
+                        unAIcon: "folderShare",
+                        AIcon: "olderOpen",
+                        msg: {
+                            title: "被退回",
+                            time: "08/10 18:12",
+                            data: [{
+                                text: "项目立项申请",
+                                time: "08/10 18:12"
+                            }, {
+                                text: "报销申请",
+                                time: "08/10 18:12"
+                            }, {
+                                text: "资产领用申请",
+                                time: "08/10 18:12"
+                            }]
+                        }
+                    }, ],
+                }, ]
             }
         },
     })
