@@ -8,12 +8,13 @@
     <title>Document</title>
     <link rel="stylesheet" href="./css/index.css">
     <script src="./js/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.2/echarts.min.js"></script>
 </head>
 
 <body>
     <div id="app" class="home-div">
         <div class="top">
-            <div class="logo">
+            <!-- <div class="logo">
                 logo
             </div>
             <div class="main">
@@ -29,38 +30,29 @@
                 <div class="operate-main">
                     <div class="item icon" :class="item" v-for="(item, index) in operateIcons" :key="index"></div>
                 </div>
-            </div>
+            </div> -->
         </div>
         <div class="main">
             <div class="main-left">
-                <div class="item" v-for="(item, index) in leftIcons" :key="index">
+                <!-- <div class="item" v-for="(item, index) in leftIcons" :key="index">
                     <div class="icon" :class="item"></div>
-                </div>
+                </div> -->
             </div>
             <div class="main-right">
-                <div class="item" :style='{width:"350px",height:"200px"}'>
-                    <div>
-                        <div class="title">
-                            <div class="title-icon">
-                                <span class="icon kuaijiefangwen"></span>
-                            </div>
-                            <div class="title-operate icon shezhi"></div>
-                        </div>
-                        <div class="main icons">
-                            <div class="icons-item">
-                                <div>
-                                    <div class="icon qingjia"></div>
-                                </div>
-                                <div>请假</div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="item" :style='{width:"550px",height:"300px"}'>
+                    <echarts-div title="" title-icon="leibie">
+                        </echarts-diviv>
                 </div>
 
-                <div class="item" v-for="(item, index) in mainItems" :key="index" :style='toPx(item.style)'>
-                    <component :is="item.is" :img-data="item.imgData" :progress="item.progress" :title="item.title" :title-icon="item.titleIcon" :msg-div="item.msgDiv" />
-                </div>
-
+                <!-- <div class="item" v-for="(item, index) in mainItems" :key="index" :style='toPx(item.style)'>
+                    <template v-if="item.is == 'common-div'">
+                        <common-div :img-data="item.imgData" :progress="item.progress" :title="item.title" :title-icon="item.titleIcon" :msg-div="item.msgDiv"></common-div>
+                    </template>
+                    <template v-if="item.is == 'kjfw-div'">
+                        <kjfw-div :title="item.title" :title-icon="item.titleIcon" :main="item.main" ></kjfw-div>
+                    </template> 
+                </div> -->
+                <!-- <component :is="item.is" :img-data="item.imgData" :progress="item.progress" :title="item.title" :title-icon="item.titleIcon" :msg-div="item.msgDiv" /> -->
             </div>
         </div>
     </div>
@@ -86,6 +78,55 @@
             }
         }
     }
+    Vue.component('echarts-div', {
+        props: {
+            title: {
+                type: String
+            },
+            titleIcon: {
+                type: String
+            },
+        },
+        mixins: [mixinSetting],
+        mounted() {
+            // 基于准备好的dom，初始化echarts实例
+            var myChart = echarts.init(document.getElementById('echarts-main'));
+
+            // 指定图表的配置项和数据
+            var option = {
+                title: {
+                    text: 'ECharts 入门示例'
+                },
+                tooltip: {},
+                legend: {
+                    data: ['销量']
+                },
+                xAxis: {
+                    data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
+                },
+                yAxis: {},
+                series: [{
+                    name: '销量',
+                    type: 'bar',
+                    data: [5, 20, 36, 10, 10, 20]
+                }]
+            };
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+        },
+        template: `
+                    <div>
+                        <div class="title">
+                            <div class="title-icon">
+                                <span class="icon" :class="titleIcon"></span>{{title}}
+                            </div>
+                            <div class="title-operate icon shezhi" @click="mixinSetting('123')"></div>
+                        </div>
+                        <div class="main" id="echarts-main"> 
+                        </div>
+                    </div>`
+
+    })
     Vue.component('kjfw-div', {
         props: {
             title: {
@@ -93,6 +134,9 @@
             },
             titleIcon: {
                 type: String
+            },
+            main: {
+                type: Array
             },
         },
         mixins: [mixinSetting],
@@ -110,11 +154,11 @@
                             <div class="title-operate icon shezhi" @click="mixinSetting('123')"></div>
                         </div>
                         <div class="main icons">
-                            <div class="icons-item">
+                            <div class="icons-item" v-for="(item, index) in main" :key="index">
                                 <div>
-                                    <div class="icon qingjia"></div>
+                                    <div class="icon " :class="item.titleIcon"></div>
                                 </div>
-                                <div>请假</div>
+                                <div>{{item.title}}</div>
                             </div>
                         </div>
                     </div>`
@@ -318,7 +362,44 @@
                             }]
                         }
                     }, ],
-                }, ]
+                }, {
+                    is: "kjfw-div",
+                    id: 2,
+                    style: {
+                        width: 350,
+                        height: 200,
+                    },
+                    title: "待办",
+                    titleIcon: "kuaijiefangwen",
+                    main: [{
+                        title: "待办",
+                        titleIcon: "kuaijiefangwen",
+                    }, {
+                        title: "待办",
+                        titleIcon: "kuaijiefangwen",
+                    }, {
+                        title: "待办",
+                        titleIcon: "kuaijiefangwen",
+                    }, {
+                        title: "待办",
+                        titleIcon: "kuaijiefangwen",
+                    }, {
+                        title: "待办",
+                        titleIcon: "kuaijiefangwen",
+                    }, {
+                        title: "待办",
+                        titleIcon: "kuaijiefangwen",
+                    }, {
+                        title: "待办",
+                        titleIcon: "kuaijiefangwen",
+                    }, {
+                        title: "待办",
+                        titleIcon: "kuaijiefangwen",
+                    }, {
+                        title: "待办",
+                        titleIcon: "kuaijiefangwen",
+                    }, ]
+                }]
             }
         },
     })
