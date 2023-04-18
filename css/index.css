@@ -30,7 +30,7 @@ body {
   flex: 1;
   height: 100%;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   margin-left: 20px;
 }
 .home-div > .top > .main > .item {
@@ -45,7 +45,7 @@ body {
   margin: 0 5px;
 }
 .home-div > .top > .operate {
-  width: 415px;
+  width: 435px;
   display: flex;
   align-items: flex-end;
 }
@@ -73,6 +73,8 @@ body {
   flex: 1;
   height: 24px;
   text-align: right;
+  display: flex;
+  align-items: center;
 }
 .home-div > .top > .operate > .operate-main > .item {
   margin: 0px 10px;
@@ -104,10 +106,38 @@ body {
   float: left;
   background-color: #fff;
   margin: 10px;
+  position: relative;
+  overflow: hidden;
 }
-.home-div > .main > .main-right > .item > div {
+.home-div > .main > .main-right > .item > div:first-child {
   width: 100%;
   height: 100%;
+}
+.home-div > .main > .main-right > .item > div.g-rt {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.home-div > .main > .main-right > .item > div.t-r {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+  transform: rotate(90deg);
+}
+.home-div > .main > .main-right > .item > div.t-b {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+.home-div > .main > .main-right > .item > div.t-rb {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  transform: rotate(135deg);
 }
 .home-div > .main > .main-right > .item > div > .title {
   height: 29px;
@@ -244,6 +274,18 @@ body {
   height: 24px;
   background-repeat: no-repeat;
   background-position: center;
+}
+.icon.icon-s {
+  width: 12px;
+  height: 12px;
+}
+.icon.icon-m {
+  width: 24px;
+  height: 24px;
+}
+.icon.icon-l {
+  width: 36px;
+  height: 36px;
 }
 .icon.bangzhu {
   background-image: url('data:image/svg+xml;utf-8,<svg id="图层_1" data-name="图层 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 15.1 23.84"><defs><style>.cls-1{fill:none;}.cls-2{clip-path:url(%23clip-path);}.cls-3{fill:%23cccccc;}</style><clipPath id="clip-path" transform="translate(-4.5 -0.06)"><rect class="cls-1" x="4.5" width="15.1" height="24"/></clipPath></defs><g class="cls-2"><path class="cls-3" d="M10.8,20.8a.65.65,0,0,1,.6-.6h1.2a.58.58,0,0,1,.6.6v2.5a.65.65,0,0,1-.6.6H11.4a.58.58,0,0,1-.6-.6Zm3.9-6.2a4.88,4.88,0,0,0-.7.3,1.08,1.08,0,0,0-.7,1.1v.6a1.3,1.3,0,0,1-1.3,1,1.38,1.38,0,0,1-1.2-1.2,3.63,3.63,0,0,1,2.3-3.8,4.88,4.88,0,0,1,.7-.3,5,5,0,0,0,3.3-5.2,5.1,5.1,0,0,0-4.3-4.5A5,5,0,0,0,7,7.4a.9.9,0,0,1-.1.5,1.3,1.3,0,0,1-1.4.9,1.19,1.19,0,0,1-1-1.2A7.24,7.24,0,0,1,6.3,2.7,7.19,7.19,0,0,1,13.8.3,7.15,7.15,0,0,1,19.4,6c.1.5.1,1,.2,1.6a7.57,7.57,0,0,1-4.9,7Z" transform="translate(-4.5 -0.06)"/></g></svg>');
@@ -429,7 +471,7 @@ body {
   background-image: url('data:image/svg+xml;utf-8,<svg id="图层_1" data-name="图层 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 776.2 776.2"><defs><style>.cls-1{fill:none;}.cls-2{clip-path:url(%23000000;ath);}.cls-3{fill:%23000000;}</style><clipPath id="clip-path" transform="translate(-570.8 -152.8)"><rect class="cls-1" x="571" y="152" width="776.9" height="777.8"/></clipPath></defs><g class="cls-2"><path class="cls-3" d="M958.9,496.3,624.7,162.1a31.6,31.6,0,0,0-53.9,22.3,31.16,31.16,0,0,0,9.3,22.3L914.3,540.9,580.1,875.1A31.6,31.6,0,0,0,602.4,929a31.16,31.16,0,0,0,22.3-9.3L958.9,585.5l334.2,334.2a31.6,31.6,0,0,0,53.9-22.3,31.16,31.16,0,0,0-9.3-22.3L1003.5,540.9l334.2-334.2a31.6,31.6,0,0,0-22.3-53.9,31.16,31.16,0,0,0-22.3,9.3Z" transform="translate(-570.8 -152.8)"/></g></svg>');
 }
 .icon.guanbi_jiaobiao {
-  background-image: url('data:image/svg+xml;utf-8,<svg id="图层_1" data-name="图层 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 786.5 786.5"><defs><style>.cls-1{fill:%23000000;}.cls-2{fill:%23000000;cls-3{fill:%23000000;}</style></defs><path class="cls-1" d="M896.5,336.5H1563c108.1,0,120,.1,120,108.2V1123Z" transform="translate(-896.5 -336.5)"/><path class="cls-2" d="M1411.6,561.4l-91.8,91.8c-13.1,13.1-13.1,32.8,0,45.9s32.8,13.1,45.9,0l91.8-91.8,91.8,91.8c13.1,13.1,32.8,13.1,45.9,0s13.1-32.8,0-45.9l-91.7-91.8,91.7-91.7c13.1-13.1,13.1-32.8,0-45.9s-32.8-13.1-45.9,0l-91.8,91.7-91.8-91.7c-13.1-13.1-32.8-13.1-45.9,0s-13.1,32.8,0,45.9Z" transform="translate(-896.5 -336.5)"/><path class="cls-3" d="M891.4,342" transform="translate(-896.5 -336.5)"/></svg>');
+  background-image: url('data:image/svg+xml;utf-8,<svg id="图层_1" data-name="图层 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 786.5 786.5"><defs><style>.cls-1{fill:%23000000;}.cls-2{fill:%23ffffff;cls-3{fill:%23000000;}</style></defs><path class="cls-1" d="M896.5,336.5H1563c108.1,0,120,.1,120,108.2V1123Z" transform="translate(-896.5 -336.5)"/><path class="cls-2" d="M1411.6,561.4l-91.8,91.8c-13.1,13.1-13.1,32.8,0,45.9s32.8,13.1,45.9,0l91.8-91.8,91.8,91.8c13.1,13.1,32.8,13.1,45.9,0s13.1-32.8,0-45.9l-91.7-91.8,91.7-91.7c13.1-13.1,13.1-32.8,0-45.9s-32.8-13.1-45.9,0l-91.8,91.7-91.8-91.7c-13.1-13.1-32.8-13.1-45.9,0s-13.1,32.8,0,45.9Z" transform="translate(-896.5 -336.5)"/><path class="cls-3" d="M891.4,342" transform="translate(-896.5 -336.5)"/></svg>');
 }
 .icon.guangbiao-bianji {
   background-image: url('data:image/svg+xml;utf-8,<svg id="图层_1" data-name="图层 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 625.21 711.64"><defs><style>.cls-1,.cls-2{fill:%23000000;}.cls-1,.cls-3{stroke:%23000000;roke-miterlimit:10;stroke-width:8px;}.cls-3{fill:%23000000;/style></defs><path class="cls-1" d="M1170.6,906.8l-140.4,159.9c-21,22.3-58.4,7.4-58.4-23.2V380l445,483c22.9,20.3,9.1,58.2-21.5,59.1Z" transform="translate(-967.8 -369.76)"/><polygon class="cls-2" points="72.9 578.45 170.6 464.94 332.7 481.14 75.4 198.65 72.9 578.45"/><path class="cls-2" d="M1170.6,906.8" transform="translate(-967.8 -369.76)"/><path class="cls-3" d="M1278.2,688.8l-1.1-1.1c-17.7-17.7,7.9-103.8,17.3-113.2l87.5-121.4c36.7-41.4-8.7-4,58.4,62,79.6,78.2,116.5,29.1,71.9,68.3l-120.8,88C1382,681,1295.9,706.5,1278.2,688.8Z" transform="translate(-967.8 -369.76)"/><path class="cls-3" d="M1418.6,411.8l18.8-22c42.5-47,191.4,87.8,141.5,136.4l-22,18.1C1515,580.1,1385.5,450.7,1418.6,411.8Z" transform="translate(-967.8 -369.76)"/></svg>');

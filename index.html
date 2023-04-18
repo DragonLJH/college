@@ -28,7 +28,7 @@
                     <span class="icon quanwenjiansuo"></span>
                 </div>
                 <div class="operate-main">
-                    <div class="item icon" :class="item" v-for="(item, index) in operateIcons" :key="index"></div>
+                    <div class="item icon" @click="iconClick(item.clickStr)" :class="`${item.name} ${item.iconSize}`" v-for="(item, index) in operateIcons" :key="index"></div>
                 </div>
             </div> -->
         </div>
@@ -40,9 +40,15 @@
             </div>
             <div class="main-right">
                 <div class="item" :style='{width:"550px",height:"300px"}'>
-                    <echarts-div title="" title-icon="leibie">
-                        </echarts-diviv>
+                    <div></div>
+                    <div class="icon icon-m" :class="item" v-for="(item, index) in ['guanbi_jiaobiao g-rt','guangbiao-tuozhuai t-r','guangbiao-tuozhuai t-b','guangbiao-tuozhuai t-rb',]" :key="index">
+
+                    </div>
+
                 </div>
+                <!-- <div class="item" :style='{width:"550px",height:"300px"}'>
+                    <echarts-div title="" title-icon="leibie" />
+                </div> -->
 
                 <!-- <div class="item" v-for="(item, index) in mainItems" :key="index" :style='toPx(item.style)'>
                     <template v-if="item.is == 'common-div'">
@@ -50,210 +56,74 @@
                     </template>
                     <template v-if="item.is == 'kjfw-div'">
                         <kjfw-div :title="item.title" :title-icon="item.titleIcon" :main="item.main" ></kjfw-div>
-                    </template> 
+                    </template>
                 </div> -->
                 <!-- <component :is="item.is" :img-data="item.imgData" :progress="item.progress" :title="item.title" :title-icon="item.titleIcon" :msg-div="item.msgDiv" /> -->
             </div>
         </div>
     </div>
 </body>
+<script src="./js/mixins.js"></script>
+<script src="./js/common-div.js"></script>
+<script src="./js/kjfw-div.js"></script>
+<script src="./js/echarts-div.js"></script>
 <script>
-    var mixin = {
-        methods: {
-            toPx: function(obj) {
-                const newObj = {
-                    ...obj
-                }
-                Object.entries(newObj).forEach(([k, v]) => {
-                    if (Object.prototype.toString.call(v) == '[object Number]') newObj[k] += "px"
-                })
-                return newObj
-            }
-        }
-    }
-    var mixinSetting = {
-        methods: {
-            mixinSetting: function(data) {
-                console.log("mixinSetting", data)
-            }
-        }
-    }
-    Vue.component('echarts-div', {
-        props: {
-            title: {
-                type: String
-            },
-            titleIcon: {
-                type: String
-            },
-        },
-        mixins: [mixinSetting],
-        mounted() {
-            // 基于准备好的dom，初始化echarts实例
-            var myChart = echarts.init(document.getElementById('echarts-main'));
-
-            // 指定图表的配置项和数据
-            var option = {
-                title: {
-                    text: 'ECharts 入门示例'
-                },
-                tooltip: {},
-                legend: {
-                    data: ['销量']
-                },
-                xAxis: {
-                    data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
-                },
-                yAxis: {},
-                series: [{
-                    name: '销量',
-                    type: 'bar',
-                    data: [5, 20, 36, 10, 10, 20]
-                }]
-            };
-            // 使用刚指定的配置项和数据显示图表。
-            myChart.setOption(option);
-        },
-        template: `
-                    <div>
-                        <div class="title">
-                            <div class="title-icon">
-                                <span class="icon" :class="titleIcon"></span>{{title}}
-                            </div>
-                            <div class="title-operate icon shezhi" @click="mixinSetting('123')"></div>
-                        </div>
-                        <div class="main" id="echarts-main"> 
-                        </div>
-                    </div>`
-
-    })
-    Vue.component('kjfw-div', {
-        props: {
-            title: {
-                type: String
-            },
-            titleIcon: {
-                type: String
-            },
-            main: {
-                type: Array
-            },
-        },
-        mixins: [mixinSetting],
-        data: function() {
-            return {}
-        },
-        methods: {},
-        mounted() {},
-        template: `
-                    <div>
-                        <div class="title">
-                            <div class="title-icon">
-                                <span class="icon" :class="titleIcon"></span>{{title}}
-                            </div>
-                            <div class="title-operate icon shezhi" @click="mixinSetting('123')"></div>
-                        </div>
-                        <div class="main icons">
-                            <div class="icons-item" v-for="(item, index) in main" :key="index">
-                                <div>
-                                    <div class="icon " :class="item.titleIcon"></div>
-                                </div>
-                                <div>{{item.title}}</div>
-                            </div>
-                        </div>
-                    </div>`
-
-    })
-    Vue.component('common-div', {
-        props: {
-            title: {
-                type: String
-            },
-            titleIcon: {
-                type: String
-            },
-            imgData: {
-                type: Object
-            },
-            progress: {
-                type: Object
-            },
-            msgDiv: {
-                type: Array
-            }
-        },
-        mixins: [mixinSetting],
-        data: function() {
-            return {
-                commonMsgDiv: []
-            }
-        },
-        methods: {
-            iconClick(index) {
-                let item = JSON.parse(JSON.stringify(this.commonMsgDiv[index]))
-                if (!item.isGroup) return
-                item.active = !item.active
-                if (item.active) {
-                    item.icon = item.AIcon
-                } else {
-                    item.icon = item.unAIcon
-                }
-                this.$set(this.commonMsgDiv, index, item)
-            }
-        },
-        mounted() {
-            this.commonMsgDiv = JSON.parse(JSON.stringify(this.msgDiv))
-        },
-        template: `<div>
-                    <div class="title">
-                        <div class="title-icon">
-                            <span class="icon" :class="titleIcon"></span>{{title}}
-                        </div>
-                            <div class="title-operate icon shezhi" @click="mixinSetting('123')"></div>
-                    </div>
-                    <div class="main">
-                        <div class="img-div" v-if="imgData.show">
-                            <div class="img">
-                            </div>
-                            <div class="msg">
-                                <div v-for="(item, index) in imgData?.data" :key="index">
-                                    {{item}}
-                                </div> 
-                            </div>
-                        </div>
-                        <div class="progress" v-if="progress.show">
-                            <div class="item">
-                                <div :style="{width: progress.pace }"></div>
-                                <span>{{progress.pace}}({{progress.name}})</span>
-                            </div>
-                            <div class="icon shezhi"></div>
-                        </div>
-                        <div class="icon-div" v-for="(item, index) in commonMsgDiv" :key="index" >
-                            <div @click="iconClick(index)" class="icon " :class="item.icon" :data-num="item.msg.data.length?item.msg.data.length:''"></div>
-                            <div class="msg">
-                                <div class="msg-item">
-                                    <div>{{item.msg.title}}</div>
-                                    <div>{{item.msg.time}}</div>
-                                </div>
-                                <div v-show="item.isGroup && item.active" class="msg-item"  v-for="(val, index) in item.msg.data" :key="index">
-                                    <div>{{val.text}}</div>
-                                    <div>{{val.time}}</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>`
-    })
-
     var vm = new Vue({
         el: "#app",
         mixins: [mixin],
         data() {
             return {
+                iconClicks: {
+                    "homeSetting": () => {
+                        console.log("homeSetting")
+                    },
+                },
+                homeSet: false,
+                styleList: [{
+                    id: 0,
+                    style: {
+                        width: 350,
+                        height: 200,
+                    }
+                }, {
+                    id: 1,
+                    style: {
+                        width: 350,
+                        height: 200,
+                    }
+                }, {
+                    id: 2,
+                    style: {
+                        width: 350,
+                        height: 200,
+                    }
+                }, ],
                 quanwenjiansuo: "",
-                operateIcons: [
-                    "zaixianbangzhu", "shezhi", "lieshu", "huanfu", "suoping", "tuichu"
-                ],
+                operateIcons: [{
+                    name: "zaixianbangzhu",
+                    iconSize: "icon-m",
+                    clickStr: ""
+                }, {
+                    name: "shezhi",
+                    iconSize: "icon-m",
+                    clickStr: "homeSetting"
+                }, {
+                    name: "lieshu",
+                    iconSize: "icon-m",
+                    clickStr: ""
+                }, {
+                    name: "huanfu",
+                    iconSize: "icon-m",
+                    clickStr: ""
+                }, {
+                    name: "suoping",
+                    iconSize: "icon-m",
+                    clickStr: ""
+                }, {
+                    name: "tuichu",
+                    iconSize: "icon-l",
+                    clickStr: ""
+                }],
                 leftIcons: [
                     "leibie", "kehuguanli", "huodong", "wenjianjia_zhankai", "fenlei", "chanyeleibie", "jichuguanli", "zhengcepipei"
                 ],
@@ -400,6 +270,14 @@
                         titleIcon: "kuaijiefangwen",
                     }, ]
                 }]
+            }
+        },
+
+        methods: {
+            iconClick(str) {
+                console.log("iconClick", str)
+                if (str == "") return
+                this.iconClicks[str]()
             }
         },
     })
