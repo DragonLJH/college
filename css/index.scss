@@ -116,7 +116,7 @@ $home-top-background-color: #444;
                         top: 0;
                         right: 0;
                     }
-                    &.t-r {
+                    &.r {
                         position: absolute;
                         right: 0;
                         top: 0;
@@ -124,14 +124,14 @@ $home-top-background-color: #444;
                         margin: auto 0;
                         transform: rotate(90deg);
                     }
-                    &.t-b {
+                    &.b {
                         position: absolute;
                         bottom: 0;
                         left: 0;
                         right: 0;
                         margin: 0 auto;
                     }
-                    &.t-rb {
+                    &.rb {
                         position: absolute;
                         right: 0;
                         bottom: 0;
