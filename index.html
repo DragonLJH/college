@@ -14,7 +14,7 @@
 <body>
     <div id="app" class="home-div">
         <div class="top">
-            <!-- <div class="logo">
+            <div class="logo">
                 logo
             </div>
             <div class="main">
@@ -30,7 +30,7 @@
                 <div class="operate-main">
                     <div class="item icon" @click="iconClick(item.clickStr)" :class="`${item.name} ${item.iconSize}`" v-for="(item, index) in operateIcons" :key="index"></div>
                 </div>
-            </div> -->
+            </div>
         </div>
         <div class="main">
             <div class="main-left">
@@ -39,109 +39,35 @@
                 </div> -->
             </div>
             <div class="main-right" ref="main">
-                <div class="item" :style='{width:"550px",height:"400px"}'>
-
-                    <div></div>
-                    <div class="icon icon-m" :class="item" v-for="(item, index) in ['guanbi_jiaobiao g-rt','guangbiao-tuozhuai t-r','guangbiao-tuozhuai t-b','guangbiao-tuozhuai t-rb',]" :key="index">
-
-                    </div>
-
-                </div>
-                <control-div v-for="(item, index) in styleList" :key="index" v-model='item.style'>
+                <control-div v-for="(item, index) in styleList" :key="Math.random(1)" :number="index" v-model='item.style' :is-setting="isSetting" @index="iconClicks['controlClose']">
                     <div>123</div>
                 </control-div>
                 <!-- <div class="item" :style='{width:"550px",height:"300px"}'>
                     <echarts-div title="" title-icon="leibie" />
                 </div> -->
 
-                <!-- <div class="item" v-for="(item, index) in mainItems" :key="index" :style='toPx(item.style)'>
+                <!-- <control-div class="item" v-for="(item, index) in mainItems" :key="index" v-model='item.style' :is-setting="isSetting">
                     <template v-if="item.is == 'common-div'">
                         <common-div :img-data="item.imgData" :progress="item.progress" :title="item.title" :title-icon="item.titleIcon" :msg-div="item.msgDiv"></common-div>
                     </template>
                     <template v-if="item.is == 'kjfw-div'">
                         <kjfw-div :title="item.title" :title-icon="item.titleIcon" :main="item.main" ></kjfw-div>
                     </template>
-                </div> -->
+                    <template v-if="item.is == 'echarts-div'">
+                        <echarts-div title="" title-icon="leibie" />
+                    </template>
+                </control-div> -->
                 <!-- <component :is="item.is" :img-data="item.imgData" :progress="item.progress" :title="item.title" :title-icon="item.titleIcon" :msg-div="item.msgDiv" /> -->
             </div>
         </div>
     </div>
 </body>
 <script src="./js/mixins.js"></script>
+<script src="./js/control-div.js"></script>
 <script src="./js/common-div.js"></script>
 <script src="./js/kjfw-div.js"></script>
 <script src="./js/echarts-div.js"></script>
 <script>
-    Vue.component('control-div', {
-        inject: ['parent'],
-        mixins: [mixin],
-        props: {
-            styleObject: {
-                type: Object
-            }
-        },
-        model: {
-            prop: "styleObject",
-            event: "change"
-        },
-        data() {
-            return {
-                controlStyle: this.styleObject
-            }
-        },
-        mounted() {},
-        methods: {
-            canvasMouseDown(e, direction) {
-                // 获取 control-div 组件的坐标以及宽高
-                const {
-                    x: cX,
-                    y: cY,
-                    width: cW,
-                    height: cH
-                } = this.$refs.canvas.getBoundingClientRect()
-                const move = (moveEvent) => {
-                    // 解构赋值 给 moveX 和 moveY 分别赋值 clientX 和 clientY
-                    // 移动后的坐标
-                    const {
-                        clientX: moveX,
-                        clientY: moveY
-                    } = moveEvent
-                    // 根据拖拽的节点方向（direction）重新计算
-                    if (direction) {
-                        let mW = cW
-                        let mH = cH
-                        if (direction.indexOf("r") !== -1) mW += moveX - cX - mW + 20
-                        if (direction.indexOf("b") !== -1) mH += moveY - cY - mH + 20
-                        if (mW + 20 > this.parent.MW) mW = this.parent.MW
-                        if (mH + 20 > this.parent.MH) mH = this.parent.MH
-                        this.controlStyle = {
-                            ...this.controlStyle,
-                            width: mW,
-                            height: mH,
-                        }
-                        return
-                    }
-                }
-                const up = (e) => { // 鼠标松开结束事件的监听 
-                    document.removeEventListener("mousemove", move);
-                    document.removeEventListener("mouseup", up);
-                    this.$emit("change", this.controlStyle)
-                    console.log("up", this.controlStyle)
-                };
-                // 鼠标按下的时候分别监听鼠标移动事件和鼠标松开事件
-                document.addEventListener("mousemove", move);
-                document.addEventListener("mouseup", up);
-            }
-
-        },
-        template: `
-            <div class="item" :style='toPx(controlStyle)' ref="canvas">
-                <slot></slot>
-                <div class="icon icon-m guanbi_jiaobiao g-rt"></div>
-                <div @mousedown.stop="canvasMouseDown($event, direction)" class="icon icon-m guangbiao-tuozhuai" :class="direction" v-for="(direction, index) in ['r','b','rb',]" :key="index"></div> 
-            </div> 
-        `
-    })
     var vm = new Vue({
         el: "#app",
         mixins: [mixin],
@@ -156,10 +82,18 @@
                 MY: 0,
                 MW: 0,
                 MH: 0,
+                isSetting: false,
                 iconClicks: {
                     "homeSetting": () => {
-                        console.log("homeSetting")
+                        this.isSetting = !this.isSetting
                     },
+                    "controlClose": (index) => {
+                        let list = JSON.parse(JSON.stringify(this.styleList))
+                        list.splice(index, 1)
+                            // this.styleList.splice(index, 1)
+                        this.styleList = list
+                        console.log("controlClose", list, this.styleList, index)
+                    }
                 },
                 homeSet: false,
                 styleList: [{
@@ -172,13 +106,13 @@
                     id: 1,
                     style: {
                         width: 350,
-                        height: 200,
+                        height: 250,
                     }
                 }, {
                     id: 2,
                     style: {
                         width: 400,
-                        height: 200,
+                        height: 300,
                     }
                 }, ],
                 quanwenjiansuo: "",
@@ -373,7 +307,10 @@
                 this.MY = y
                 this.MW = width
                 this.MH = height
-            }
+            },
+            changeStyleList(index) {
+                console.log("changeStyleList", index)
+            },
         },
         mounted() {
             this.getMainXY()
