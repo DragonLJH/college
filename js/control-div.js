@@ -44,8 +44,8 @@ Vue.component('control-div', {
                     let mH = cH
                     if (direction.indexOf("r") !== -1) mW += moveX - cX - mW + 20
                     if (direction.indexOf("b") !== -1) mH += moveY - cY - mH + 20
-                    if (mW + 20 > this.parent.MW) mW = this.parent.MW
-                    if (mH + 20 > this.parent.MH) mH = this.parent.MH
+                    if (mW + 20 > this.parent.MW) mW = this.parent.MW - 20
+                    if (mH + 20 > this.parent.MH) mH = this.parent.MH - 20
                     this.controlStyle = {
                         ...this.controlStyle,
                         width: mW,

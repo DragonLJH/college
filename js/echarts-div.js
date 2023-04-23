@@ -6,6 +6,9 @@ Vue.component('echarts-div', {
         titleIcon: {
             type: String
         },
+        styleObject: {
+            type: Object
+        },
     },
     mixins: [mixinSetting],
     data() {
@@ -136,10 +139,17 @@ Vue.component('echarts-div', {
         };
         // 使用刚指定的配置项和数据显示图表。
         this.myChart.setOption(option);
-
+    },
+    watch: {
+        styleObject: function(n, o) {
+            const { width, height } = n
+            this.myChart.getDom().style.width = width
+            this.myChart.getDom().style.height = height
+            this.myChart.resize()
+        }
     },
     template: `
-                <div>
+                <div class="mover">
                     <div class="title">
                         <div class="title-icon" @click="changeOption">
                             <span class="icon" :class="titleIcon"></span>{{title}}

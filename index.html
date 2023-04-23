@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="./css/index.css">
     <script src="./js/vue.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.2/echarts.min.js"></script>
+    <script src="./js/Sortable.min.js"></script>
+    <script src="./js/vuedraggable.umd.min.js"></script>
 </head>
 
 <body>
@@ -34,29 +36,42 @@
         </div>
         <div class="main">
             <div class="main-left">
-                <!-- <div class="item" v-for="(item, index) in leftIcons" :key="index">
-                    <div class="icon" :class="item"></div>
-                </div> -->
+                <div class="item" v-for="(item, index) in leftIcons" :key="Math.random(1)">
+                    <div class="icon icon-l guanbi_jiaobiao" v-show="isSetting" @click="iconClicks['leftIconClose']"></div>
+                    <div class="icon icon-m" :class="item"></div>
+                </div>
+                <div class="item" v-show="isSetting">
+                    <div class="icon icon-l jia"></div>
+                </div>
             </div>
             <div class="main-right" ref="main">
-                <control-div v-for="(item, index) in styleList" :key="Math.random(1)" :number="index" v-model='item.style' :is-setting="isSetting" @index="iconClicks['controlClose']">
-                    <div>123</div>
-                </control-div>
+                <!-- <draggable v-model="styleList" handle=".mover" group="control-div" @start="onStart" @end="onEnd">
+                    <transition-group>
+                        <control-div v-for="(item, index) in styleList" :key="Math.random(1)" :number="index" v-model='item.style' :is-setting="isSetting" @index="iconClicks['controlClose']">
+                            <div class="mover">123</div>
+                        </control-div>
+                    </transition-group>
+                </draggable> -->
+
                 <!-- <div class="item" :style='{width:"550px",height:"300px"}'>
                     <echarts-div title="" title-icon="leibie" />
                 </div> -->
 
-                <!-- <control-div class="item" v-for="(item, index) in mainItems" :key="index" v-model='item.style' :is-setting="isSetting">
-                    <template v-if="item.is == 'common-div'">
+                <draggable v-model="mainItems" handle=".mover" group="control-div" @start="onStart" @end="onEnd">
+                    <transition-group>
+                        <control-div class="item" v-for="(item, index) in mainItems" :key="index" v-model='item.style' :is-setting="isSetting">
+                            <template v-if="item.is == 'common-div'">
                         <common-div :img-data="item.imgData" :progress="item.progress" :title="item.title" :title-icon="item.titleIcon" :msg-div="item.msgDiv"></common-div>
                     </template>
-                    <template v-if="item.is == 'kjfw-div'">
+                            <template v-if="item.is == 'kjfw-div'">
                         <kjfw-div :title="item.title" :title-icon="item.titleIcon" :main="item.main" ></kjfw-div>
                     </template>
-                    <template v-if="item.is == 'echarts-div'">
-                        <echarts-div title="" title-icon="leibie" />
+                            <template v-if="item.is == 'echarts-div'">
+                        <echarts-div title="" title-icon="leibie" :style-object="item.style" />
                     </template>
-                </control-div> -->
+                        </control-div>
+                    </transition-group>
+                </draggable>
                 <!-- <component :is="item.is" :img-data="item.imgData" :progress="item.progress" :title="item.title" :title-icon="item.titleIcon" :msg-div="item.msgDiv" /> -->
             </div>
         </div>
@@ -68,6 +83,9 @@
 <script src="./js/kjfw-div.js"></script>
 <script src="./js/echarts-div.js"></script>
 <script>
+    // 全局注册组件
+    Vue.component('vuedraggable', window.vuedraggable)
+
     var vm = new Vue({
         el: "#app",
         mixins: [mixin],
@@ -93,7 +111,14 @@
                             // this.styleList.splice(index, 1)
                         this.styleList = list
                         console.log("controlClose", list, this.styleList, index)
-                    }
+                    },
+                    "leftIconClose": (index) => {
+                        let list = JSON.parse(JSON.stringify(this.leftIcons))
+                        list.splice(index, 1)
+                            // this.styleList.splice(index, 1)
+                        this.leftIcons = list
+                        console.log("leftIconClose", this.leftIcons)
+                    },
                 },
                 homeSet: false,
                 styleList: [{
@@ -286,6 +311,15 @@
                         title: "待办",
                         titleIcon: "kuaijiefangwen",
                     }, ]
+                }, {
+                    is: "echarts-div",
+                    id: 3,
+                    style: {
+                        width: 350,
+                        height: 200,
+                    },
+                    title: "类别",
+                    titleIcon: "leibie",
                 }]
             }
         },
@@ -311,6 +345,12 @@
             changeStyleList(index) {
                 console.log("changeStyleList", index)
             },
+            onStart() {
+                this.drag = true;
+            },
+            onEnd() {
+                this.drag = false;
+            }
         },
         mounted() {
             this.getMainXY()

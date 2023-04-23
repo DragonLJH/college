@@ -17,7 +17,7 @@ Vue.component('kjfw-div', {
     methods: {},
     mounted() {},
     template: `
-                <div>
+                <div class="mover">
                     <div class="title">
                         <div class="title-icon">
                             <span class="icon" :class="titleIcon"></span>{{title}}
