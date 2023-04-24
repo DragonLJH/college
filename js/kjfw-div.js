@@ -17,21 +17,23 @@ Vue.component('kjfw-div', {
     methods: {},
     mounted() {},
     template: `
-                <div class="mover">
-                    <div class="title">
-                        <div class="title-icon">
-                            <span class="icon" :class="titleIcon"></span>{{title}}
-                        </div>
-                        <div class="title-operate icon shezhi" @click="mixinSetting('123')"></div>
-                    </div>
-                    <div class="main icons">
-                        <div class="icons-item" v-for="(item, index) in main" :key="index">
-                            <div>
-                                <div class="icon " :class="item.titleIcon"></div>
-                            </div>
-                            <div>{{item.title}}</div>
-                        </div>
-                    </div>
-                </div>`
+<div>
+    <div class="title">
+        <div class="title-icon">
+            <span class="icon" :class="titleIcon"></span>{{title}}
+        </div>
+        <div class="title-operate icon shezhi" @click="mixinSetting('123')"></div>
+    </div>
+    <div class="main icons">
+        <div class="icons-item" v-for="(item, index) in main" :key="index">
+            <div>
+                <div class="icon icon-m" :class="item.titleIcon"></div>
+                <div class="icon rb jiaobiao icon-s"></div>
+            </div>
+            <div>{{item.title}}</div>
+        </div>
+    </div>
+</div>
+`
 
 })

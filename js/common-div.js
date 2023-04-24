@@ -38,7 +38,7 @@ Vue.component('common-div', {
     mounted() {
         this.commonMsgDiv = JSON.parse(JSON.stringify(this.msgDiv))
     },
-    template: `<div class="mover">
+    template: `<div>
                 <div class="title">
                     <div class="title-icon">
                         <span class="icon" :class="titleIcon"></span>{{title}}

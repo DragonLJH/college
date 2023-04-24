@@ -116,12 +116,17 @@ $home-top-background-color: #444;
                 margin: 10px;
                 position: relative;
                 overflow: hidden;
+                &.mover {
+                    user-select: none;
+                }
                 >div {
+                    z-index: 2;
                     &:first-child {
                         // width: calc(100% - 24px);
                         // height: calc(100% - 24px);
                         width: 100%;
                         height: 100%;
+                        z-index: 1;
                     }
                     &.g-rt {
                         position: absolute;
@@ -188,6 +193,7 @@ $home-top-background-color: #444;
                         }
                         >.progress {
                             display: flex;
+                            align-items: center;
                             >.item {
                                 position: relative;
                                 height: 18px;
@@ -265,8 +271,8 @@ $home-top-background-color: #444;
                             display: flex;
                             flex-wrap: wrap;
                             >.icons-item {
-                                width: 80px - 20px;
-                                max-height: 80px - 20px;
+                                width: 60px;
+                                height: 80px;
                                 padding: 5px;
                                 margin: 5px;
                                 >div {
@@ -274,7 +280,16 @@ $home-top-background-color: #444;
                                     align-items: center;
                                     justify-content: center;
                                     width: 100%;
-                                    height: 50%;
+                                    &:first-child {
+                                        height: 60px;
+                                        position: relative;
+                                        .rb {
+                                            position: absolute;
+                                            right: 0;
+                                            bottom: 0;
+                                        }
+                                    }
+                                    height: 20px;
                                 }
                             }
                         }

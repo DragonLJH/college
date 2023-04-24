@@ -70,7 +70,7 @@ Vue.component('control-div', {
 
     },
     template: `
-        <div class="item" :style='toPx(controlStyle)' ref="canvas">
+        <div class="item" :class="isSetting?'mover':''" :style='toPx(controlStyle)' ref="canvas">
             <slot></slot>
             <div v-show="isSetting" class="icon icon-m guanbi_jiaobiao g-rt" @click="close"></div>
             <div v-show="isSetting" @mousedown.stop="canvasMouseDown($event, direction)" class="icon icon-m guangbiao-tuozhuai" :class="direction" v-for="(direction, index) in ['r','b','rb',]" :key="index"></div> 
