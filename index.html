@@ -22,7 +22,7 @@
                 logo
             </div>
             <div class="main">
-                <div class="item">
+                <div class="item" @click="iconClicks['leftIconClick']('/')">
                     <span class="icon home"></span>首页
                 </div>
             </div>
@@ -38,9 +38,9 @@
         </div>
         <div class="main">
             <div class="main-left">
-                <div class="item" v-for="(item, index) in leftIcons" :key="Math.random(1)">
-                    <div class="icon icon-l guanbi_jiaobiao" v-show="isSetting" @click="iconClicks['leftIconClose']"></div>
-                    <div class="icon icon-m" :class="item"></div>
+                <div class="item" v-for="(item, index) in leftIcons" :key="Math.random(1)" @click="iconClicks['leftIconClick'](item.path)">
+                    <div class="icon icon-l guanbi_jiaobiao" v-show="isSetting" @click="iconClicks['leftIconClose'](index)"></div>
+                    <div class="icon icon-m" :class="item.label"></div>
                 </div>
                 <div class="item" v-show="isSetting">
                     <div class="icon icon-l jia"></div>
@@ -65,278 +65,28 @@
             </div>
         </div>
     </div>
+
 </body>
-<script src="./js/mixins.js"></script>
-<script src="./js/control-div.js"></script>
-<script src="./js/common-div.js"></script>
-<script src="./js/kjfw-div.js"></script>
-<script src="./js/echarts-div.js"></script>
+<script src="./js/mixin/mixins.js"></script>
+<script src="./js/view/home-div.js"></script>
+<script src="./js/view/leibie-div.js"></script>
+<script src="./js/components/title-div.js"></script>
+<script src="./js/components/control-div.js"></script>
+<script src="./js/components/common-div.js"></script>
+<script src="./js/components/kjfw-div.js"></script>
+<script src="./js/components/echarts-div.js"></script>
 <script>
     // 全局注册组件
     Vue.component('vuedraggable', window.vuedraggable)
     const routes = [{
         path: '/',
         component: {
-            inject: ['parent'],
-            mixins: [mixin],
-            template: `
-                <draggable v-model="mainItems" handle=".mover>div:first-child" group="control-div" @start="onStart" @end="onEnd">
-                    <transition-group>
-                        <control-div v-for="(item, index) in mainItems" :key="item.id" v-model='item.style' :is-setting="isSetting">
-                            <template v-if="item.is == 'common-div'">
-                                <common-div :img-data="item.imgData" :progress="item.progress" :title="item.title" :title-icon="item.titleIcon" :msg-div="item.msgDiv"></common-div>
-                            </template>
-                            <template v-if="item.is == 'kjfw-div'">
-                                <kjfw-div :title="item.title" :title-icon="item.titleIcon" :main="item.main" ></kjfw-div>
-                            </template>
-                            <template v-if="item.is == 'echarts-div'">
-                                <echarts-div title="" title-icon="leibie" :style-object="item.style" />
-                            </template>
-                        </control-div>
-                    </transition-group>
-                </draggable>
-            `,
-            data() {
-                return {
-                    mainItems: [{
-                        is: "common-div",
-                        id: 0,
-                        title: "个人信息",
-                        titleIcon: "cuiban",
-                        style: {
-                            width: 400,
-                            height: 300,
-                        },
-                        imgData: {
-                            show: true,
-                            img: "",
-                            data: ["小菲，上午好！", "最近登录时间：2022年/08/08 13:03", "明天有暴雨，记得出门带伞噢！"]
-                        },
-                        progress: {
-                            show: true,
-                            pace: "40%",
-                            name: "课时"
-                        },
-                        msgDiv: [{
-                            icon: "huiyi",
-                            msg: {
-                                title: "《关于公司全面预算规划会议》",
-                                time: "08/10 18:12",
-                                data: []
-                            }
-                        }, {
-                            icon: "yikatong",
-                            msg: {
-                                title: "一卡通余额:**************",
-                                time: "08/10 18:12",
-                                data: []
-                            }
-                        }, {
-                            icon: "wangzhan",
-                            msg: {
-                                title: "个人网站:xxx.xxx.xxx",
-                                time: "08/10 18:12",
-                                data: []
-                            }
-                        }, ]
-                    }, {
-                        is: "common-div",
-                        id: 1,
-                        title: "待办",
-                        titleIcon: "daiban",
-                        style: {
-                            width: 400,
-                            height: 300,
-                        },
-                        imgData: {
-                            show: false,
-                        },
-                        progress: {
-                            show: false,
-                        },
-                        msgDiv: [{
-                            isGroup: false,
-                            icon: "folderShare",
-                            msg: {
-                                title: "草稿",
-                                time: "08/10 18:12",
-                                data: []
-                            }
-                        }, {
-                            isGroup: true,
-                            icon: "olderOpen",
-                            active: true,
-                            unAIcon: "folderShare",
-                            AIcon: "olderOpen",
-                            msg: {
-                                title: "被退回",
-                                time: "08/10 18:12",
-                                data: [{
-                                    text: "项目立项申请",
-                                    time: "08/10 18:12"
-                                }, {
-                                    text: "报销申请",
-                                    time: "08/10 18:12"
-                                }, {
-                                    text: "资产领用申请",
-                                    time: "08/10 18:12"
-                                }]
-                            }
-                        }, {
-                            isGroup: true,
-                            icon: "folderShare",
-                            active: false,
-                            unAIcon: "folderShare",
-                            AIcon: "olderOpen",
-                            msg: {
-                                title: "被退回",
-                                time: "08/10 18:12",
-                                data: [{
-                                    text: "项目立项申请",
-                                    time: "08/10 18:12"
-                                }, {
-                                    text: "报销申请",
-                                    time: "08/10 18:12"
-                                }, {
-                                    text: "资产领用申请",
-                                    time: "08/10 18:12"
-                                }]
-                            }
-                        }, ],
-                    }, {
-                        is: "common-div",
-                        id: 2,
-                        title: "催办",
-                        titleIcon: "cuiban",
-                        imgData: {
-                            show: false,
-                        },
-                        progress: {
-                            show: false,
-                        },
-                        style: {
-                            width: 350,
-                            height: 200,
-                        },
-                        msgDiv: [{
-                            isGroup: false,
-                            icon: "folderShare",
-                            msg: {
-                                title: "草稿",
-                                time: "08/10 18:12",
-                                data: []
-                            }
-                        }, {
-                            isGroup: true,
-                            icon: "olderOpen",
-                            active: true,
-                            unAIcon: "folderShare",
-                            AIcon: "olderOpen",
-                            msg: {
-                                title: "被退回",
-                                time: "08/10 18:12",
-                                data: [{
-                                    text: "项目立项申请",
-                                    time: "08/10 18:12"
-                                }, {
-                                    text: "报销申请",
-                                    time: "08/10 18:12"
-                                }, {
-                                    text: "资产领用申请",
-                                    time: "08/10 18:12"
-                                }]
-                            }
-                        }, {
-                            isGroup: true,
-                            icon: "folderShare",
-                            active: false,
-                            unAIcon: "folderShare",
-                            AIcon: "olderOpen",
-                            msg: {
-                                title: "被退回",
-                                time: "08/10 18:12",
-                                data: [{
-                                    text: "项目立项申请",
-                                    time: "08/10 18:12"
-                                }, {
-                                    text: "报销申请",
-                                    time: "08/10 18:12"
-                                }, {
-                                    text: "资产领用申请",
-                                    time: "08/10 18:12"
-                                }]
-                            }
-                        }, ],
-                    }, {
-                        is: "kjfw-div",
-                        id: 3,
-                        style: {
-                            width: 350,
-                            height: 200,
-                        },
-                        title: "待办",
-                        titleIcon: "kuaijiefangwen",
-                        main: [{
-                            title: "待办",
-                            titleIcon: "kuaijiefangwen",
-                        }, {
-                            title: "待办",
-                            titleIcon: "kuaijiefangwen",
-                        }, {
-                            title: "待办",
-                            titleIcon: "kuaijiefangwen",
-                        }, {
-                            title: "待办",
-                            titleIcon: "kuaijiefangwen",
-                        }, {
-                            title: "待办",
-                            titleIcon: "kuaijiefangwen",
-                        }, {
-                            title: "待办",
-                            titleIcon: "kuaijiefangwen",
-                        }, {
-                            title: "待办",
-                            titleIcon: "kuaijiefangwen",
-                        }, {
-                            title: "待办",
-                            titleIcon: "kuaijiefangwen",
-                        }, {
-                            title: "待办",
-                            titleIcon: "kuaijiefangwen",
-                        }, ]
-                    }, {
-                        is: "echarts-div",
-                        id: 4,
-                        style: {
-                            width: 350,
-                            height: 200,
-                        },
-                        title: "类别",
-                        titleIcon: "leibie",
-                    }]
-
-                }
-            },
-            methods: {
-                onStart() {
-                    this.drag = true;
-                },
-                onEnd() {
-                    this.drag = false;
-                }
-
-            },
-            computed: {
-                isSetting() {
-                    return this.parent.isSetting
-                }
-            },
-
+            template: '<home-div />'
         }
     }, {
-        path: '/bar',
+        path: '/leibie',
         component: {
-            template: '<div>bar</div>'
+            template: '<leibie-div />'
         }
     }]
     const router = new VueRouter({
@@ -372,9 +122,13 @@
                     "leftIconClose": (index) => {
                         let list = JSON.parse(JSON.stringify(this.leftIcons))
                         list.splice(index, 1)
-                            // this.styleList.splice(index, 1)
                         this.leftIcons = list
-                        console.log("leftIconClose", this.leftIcons)
+                        console.log("leftIconClose", index)
+                    },
+                    "leftIconClick": (str) => {
+                        this.$router.replace({
+                            path: str
+                        })
                     },
                 },
                 homeSet: false,
@@ -423,161 +177,31 @@
                     iconSize: "icon-l",
                     clickStr: ""
                 }],
-                leftIcons: [
-                    "leibie", "kehuguanli", "huodong", "wenjianjia_zhankai", "fenlei", "chanyeleibie", "jichuguanli", "zhengcepipei"
-                ],
-                mainItems: [{
-                    is: "common-div",
-                    id: 0,
-                    title: "个人信息",
-                    titleIcon: "cuiban",
-                    imgData: {
-                        show: true,
-                        img: "",
-                        data: ["小菲，上午好！", "最近登录时间：2022年/08/08 13:03", "明天有暴雨，记得出门带伞噢！"]
-                    },
-                    progress: {
-                        show: true,
-                        pace: "40%",
-                        name: "课时"
-                    },
-                    msgDiv: [{
-                        icon: "huiyi",
-                        msg: {
-                            title: "《关于公司全面预算规划会议》",
-                            time: "08/10 18:12",
-                            data: []
-                        }
-                    }, {
-                        icon: "yikatong",
-                        msg: {
-                            title: "一卡通余额:**************",
-                            time: "08/10 18:12",
-                            data: []
-                        }
-                    }, {
-                        icon: "wangzhan",
-                        msg: {
-                            title: "个人网站:xxx.xxx.xxx",
-                            time: "08/10 18:12",
-                            data: []
-                        }
-                    }, ],
-                    style: {
-                        width: 350,
-                        height: 200,
-                    }
+                leftIcons: [{
+                    label: "leibie",
+                    path: "/leibie"
                 }, {
-                    is: "common-div",
-                    id: 1,
-                    title: "待办",
-                    titleIcon: "daiban",
-                    imgData: {
-                        show: false,
-                    },
-                    progress: {
-                        show: false,
-                    },
-                    style: {
-                        width: 350,
-                        height: 200,
-                    },
-                    msgDiv: [{
-                        isGroup: false,
-                        icon: "folderShare",
-                        msg: {
-                            title: "草稿",
-                            time: "08/10 18:12",
-                            data: []
-                        }
-                    }, {
-                        isGroup: true,
-                        icon: "olderOpen",
-                        active: true,
-                        unAIcon: "folderShare",
-                        AIcon: "olderOpen",
-                        msg: {
-                            title: "被退回",
-                            time: "08/10 18:12",
-                            data: [{
-                                text: "项目立项申请",
-                                time: "08/10 18:12"
-                            }, {
-                                text: "报销申请",
-                                time: "08/10 18:12"
-                            }, {
-                                text: "资产领用申请",
-                                time: "08/10 18:12"
-                            }]
-                        }
-                    }, {
-                        isGroup: true,
-                        icon: "folderShare",
-                        active: false,
-                        unAIcon: "folderShare",
-                        AIcon: "olderOpen",
-                        msg: {
-                            title: "被退回",
-                            time: "08/10 18:12",
-                            data: [{
-                                text: "项目立项申请",
-                                time: "08/10 18:12"
-                            }, {
-                                text: "报销申请",
-                                time: "08/10 18:12"
-                            }, {
-                                text: "资产领用申请",
-                                time: "08/10 18:12"
-                            }]
-                        }
-                    }, ],
+                    label: "kehuguanli",
+                    path: "/kehuguanli"
                 }, {
-                    is: "kjfw-div",
-                    id: 2,
-                    style: {
-                        width: 350,
-                        height: 200,
-                    },
-                    title: "待办",
-                    titleIcon: "kuaijiefangwen",
-                    main: [{
-                        title: "待办",
-                        titleIcon: "kuaijiefangwen",
-                    }, {
-                        title: "待办",
-                        titleIcon: "kuaijiefangwen",
-                    }, {
-                        title: "待办",
-                        titleIcon: "kuaijiefangwen",
-                    }, {
-                        title: "待办",
-                        titleIcon: "kuaijiefangwen",
-                    }, {
-                        title: "待办",
-                        titleIcon: "kuaijiefangwen",
-                    }, {
-                        title: "待办",
-                        titleIcon: "kuaijiefangwen",
-                    }, {
-                        title: "待办",
-                        titleIcon: "kuaijiefangwen",
-                    }, {
-                        title: "待办",
-                        titleIcon: "kuaijiefangwen",
-                    }, {
-                        title: "待办",
-                        titleIcon: "kuaijiefangwen",
-                    }, ]
+                    label: "huodong",
+                    path: "/huodong"
                 }, {
-                    is: "echarts-div",
-                    id: 3,
-                    style: {
-                        width: 350,
-                        height: 200,
-                    },
-                    title: "类别",
-                    titleIcon: "leibie",
-                }]
+                    label: "wenjianjia_zhankai",
+                    path: "/wenjianjia_zhankai"
+                }, {
+                    label: "fenlei",
+                    path: "/fenlei"
+                }, {
+                    label: "chanyeleibie",
+                    path: "/chanyeleibie"
+                }, {
+                    label: "jichuguanli",
+                    path: "/jichuguanli"
+                }, {
+                    label: "zhengcepipei",
+                    path: "/zhengcepipei"
+                }, ]
             }
         },
 

@@ -10,7 +10,6 @@ Vue.component('kjfw-div', {
             type: Array
         },
     },
-    mixins: [mixinSetting],
     data: function() {
         return {}
     },
@@ -18,12 +17,7 @@ Vue.component('kjfw-div', {
     mounted() {},
     template: `
 <div>
-    <div class="title">
-        <div class="title-icon">
-            <span class="icon" :class="titleIcon"></span>{{title}}
-        </div>
-        <div class="title-operate icon shezhi" @click="mixinSetting('123')"></div>
-    </div>
+    <title-div :title="title" :title-icon="titleIcon" />
     <div class="main icons">
         <div class="icons-item" v-for="(item, index) in main" :key="index">
             <div>

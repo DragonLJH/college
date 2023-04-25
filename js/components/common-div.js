@@ -16,7 +16,6 @@ Vue.component('common-div', {
             type: Array
         }
     },
-    mixins: [mixinSetting],
     data: function() {
         return {
             commonMsgDiv: []
@@ -39,12 +38,7 @@ Vue.component('common-div', {
         this.commonMsgDiv = JSON.parse(JSON.stringify(this.msgDiv))
     },
     template: `<div>
-                <div class="title">
-                    <div class="title-icon">
-                        <span class="icon" :class="titleIcon"></span>{{title}}
-                    </div>
-                        <div class="title-operate icon shezhi" @click="mixinSetting('123')"></div>
-                </div>
+                <title-div :title="title" :title-icon="titleIcon" />
                 <div class="main">
                     <div class="img-div" v-if="imgData.show">
                         <div class="img">

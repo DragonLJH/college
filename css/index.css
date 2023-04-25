@@ -30,7 +30,7 @@ body {
   flex: 1;
   height: 100%;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   margin-left: 20px;
 }
 .home-div > .top > .main > .item {
@@ -162,7 +162,6 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 0px 0px 0px 10px;
-  border-bottom: solid 1px #ccc;
 }
 .home-div > .main > .main-right .item > div > .title > .title-icon {
   flex: 1;
