@@ -112,6 +112,59 @@ body {
   height: 100%;
   overflow: hidden auto;
 }
+.home-div > .main > .main-right > .home-div {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden auto;
+}
+.home-div > .main > .main-right > .leibie-div {
+  --padding-r: 0px;
+  position: relative;
+  width: calc(100% - var(--padding-r));
+  height: calc(100% - 50px);
+  overflow: hidden auto;
+  padding-top: 50px;
+  padding-right: var(--padding-r);
+}
+.home-div > .main > .main-right .search-div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  height: 50px;
+  width: calc(100% - 20px);
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+}
+.home-div > .main > .main-right .search-div > .search-div-item {
+  border: solid 1px #999;
+  padding: 5px 10px;
+  margin: 0px 5px;
+  color: #999;
+}
+.home-div > .main > .main-right .search-div > .search-div-item > input {
+  border: none;
+  margin: 0;
+  padding: 0;
+  padding-left: 10px;
+  width: calc(100% - 34px);
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0);
+  color: #999;
+}
+.home-div > .main > .main-right .search-div > .search-div-item > input:focus-visible {
+  outline: none;
+}
+.home-div > .main > .main-right .search-div > .search-div-item:hover {
+  background-color: #333;
+  color: #fff;
+}
+.home-div > .main > .main-right .search-div > .search-div-item:hover > input {
+  color: #fff;
+}
 .home-div > .main > .main-right .item {
   float: left;
   background-color: #fff;
@@ -292,6 +345,36 @@ body {
   position: absolute;
   right: 0;
   bottom: 0;
+}
+.home-div > .main > .main-right .leibie-div-right {
+  --width: 0px;
+  position: absolute;
+  width: var(--width);
+  height: calc(100% - 50px);
+  top: 50px;
+  right: 0px;
+  display: flex;
+}
+.home-div > .main > .main-right .leibie-div-right .leibie-div-right-button {
+  position: relative;
+  width: 20px;
+}
+.home-div > .main > .main-right .leibie-div-right .leibie-div-right-button .button-div {
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  background-color: #fff;
+  color: #000;
+  font-size: 18px;
+  font-weight: bold;
+  box-sizing: border-box;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+.home-div > .main > .main-right .leibie-div-right .leibie-div-right-main {
+  flex: 1;
+  background-color: #fff;
 }
 
 .icon {

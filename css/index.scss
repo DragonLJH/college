@@ -110,6 +110,59 @@ $home-top-background-color: #444;
             width: calc(100% - 60px);
             height: 100%;
             overflow: hidden auto;
+            >.home-div {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                overflow: hidden auto;
+            }
+            >.leibie-div {
+                --padding-r: 0px;
+                position: relative;
+                width: calc(100% - var(--padding-r));
+                height: calc(100% - 50px);
+                overflow: hidden auto;
+                padding-top: 50px;
+                padding-right: var(--padding-r);
+            }
+            .search-div {
+                position: absolute;
+                top: 0;
+                left: 0;
+                box-sizing: border-box;
+                height: 50px;
+                width: calc(100% - 20px);
+                padding: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: right;
+                >.search-div-item {
+                    border: solid 1px #999;
+                    padding: 5px 10px;
+                    margin: 0px 5px;
+                    color: #999;
+                    >input {
+                        border: none;
+                        margin: 0;
+                        padding: 0;
+                        padding-left: 10px;
+                        width: calc(100% - 34px);
+                        height: 100%;
+                        background-color: rgba(0, 0, 0, 0);
+                        color: #999;
+                        &:focus-visible {
+                            outline: none;
+                        }
+                    }
+                    &:hover {
+                        background-color: #333;
+                        color: #fff;
+                        >input {
+                            color: #fff;
+                        }
+                    }
+                }
+            }
             .item {
                 float: left;
                 background-color: #fff;
@@ -293,6 +346,36 @@ $home-top-background-color: #444;
                             }
                         }
                     }
+                }
+            }
+            .leibie-div-right {
+                --width: 0px;
+                position: absolute;
+                width: var(--width);
+                height: calc(100% - 50px);
+                top: 50px;
+                right: 0px;
+                display: flex;
+                .leibie-div-right-button {
+                    position: relative;
+                    width: 20px;
+                    .button-div {
+                        width: 20px;
+                        height: 20px;
+                        line-height: 20px;
+                        text-align: center;
+                        background-color: #fff;
+                        color: #000;
+                        font-size: 18px;
+                        font-weight: bold;
+                        box-sizing: border-box;
+                        border-top-left-radius: 5px;
+                        border-bottom-left-radius: 5px;
+                    }
+                }
+                .leibie-div-right-main {
+                    flex: 1;
+                    background-color: #fff;
                 }
             }
         }

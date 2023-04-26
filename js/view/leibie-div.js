@@ -2,8 +2,24 @@ Vue.component('leibie-div', {
     inject: ['parent'],
     mixins: [mixin],
     template: `
-<div>
-    <div class="search-div"></div> 
+<div class="leibie-div" :style="{'--padding-r':openR?'300px':'20px'}">
+    <div class="search-div">
+        <div class="search-div-item">
+            <input type="text" placeholder="客户名称" />   
+        </div> 
+        <div class="search-div-item">
+            <input type="text" placeholder="地域" />
+        </div> 
+        <div class="search-div-item">
+            <input type="text" placeholder="性质" />
+        </div> 
+        <div class="search-div-item">
+            查找
+        </div> 
+        <div class="search-div-item">
+            增加
+        </div> 
+    </div> 
     <control-div v-for="(item, index) in mainItems" :key="item.id" v-model='item.style' :is-setting="false">
         <template v-if="item.is == 'common-div'">
             <common-div :img-data="item.imgData" :progress="item.progress" :title="item.title" :title-icon="item.titleIcon" :msg-div="item.msgDiv"></common-div>
@@ -15,16 +31,28 @@ Vue.component('leibie-div', {
             <echarts-div :id="item.id" title="" title-icon="leibie" :style-object="item.style" :option="item.option" />
         </template>
     </control-div>
+    <div class="leibie-div-right" :style="{'--width':openR?'300px':'20px'}">
+        <div class="leibie-div-right-button">
+            <div class="button-div" @click="openR = true">
+                <
+            </div> 
+            <div class="button-div" @click="openR = false">
+                >
+            </div> 
+        </div> 
+        <div class="leibie-div-right-main" v-show="openR"></div> 
+    </div>
 </div>
 `,
     data() {
         return {
+            openR: false,
             mainItems: [{
                 is: "echarts-div",
                 id: 0,
                 style: {
                     width: 450,
-                    height: 400,
+                    height: 300,
                 },
                 title: "类别",
                 titleIcon: "",
@@ -127,7 +155,7 @@ Vue.component('leibie-div', {
                 id: 1,
                 style: {
                     width: 450,
-                    height: 400,
+                    height: 300,
                 },
                 title: "",
                 titleIcon: "",
@@ -153,7 +181,7 @@ Vue.component('leibie-div', {
                 id: 2,
                 style: {
                     width: 450,
-                    height: 400,
+                    height: 300,
                 },
                 title: "",
                 titleIcon: "",

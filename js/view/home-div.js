@@ -2,7 +2,7 @@ Vue.component('home-div', {
     inject: ['parent'],
     mixins: [mixin],
     template: `
-    <draggable v-model="mainItems" handle=".mover>div:first-child" group="control-div" @start="onStart" @end="onEnd">
+    <draggable class="home-div" v-model="mainItems" handle=".mover>div:first-child" group="control-div" @start="onStart" @end="onEnd">
         <transition-group>
             <control-div v-for="(item, index) in mainItems" :key="item.id" v-model='item.style' :is-setting="isSetting">
                 <template v-if="item.is == 'common-div'">
