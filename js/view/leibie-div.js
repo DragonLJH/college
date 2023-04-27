@@ -269,6 +269,26 @@ Vue.component('leibie-div', {
                         }
                     ]
                 }
+            }, {
+                is: "common-div",
+                id: 3,
+                title: "",
+                titleIcon: "",
+                style: {
+                    width: 400,
+                    height: 150,
+                },
+                imgData: {
+                    show: true,
+                    type: "rectangle",
+                    img: "",
+                    data: ["小菲，上午好！", "最近登录时间：2022年/08/08 13:03", "明天有暴雨，记得出门带伞噢！"]
+                },
+                progress: {
+                    show: true,
+                    pace: "40%",
+                    name: "4/10"
+                },
             }]
 
         }

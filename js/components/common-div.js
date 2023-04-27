@@ -41,7 +41,7 @@ Vue.component('common-div', {
                 <title-div :title="title" :title-icon="titleIcon" />
                 <div class="main">
                     <div class="img-div" v-if="imgData.show">
-                        <div class="img">
+                        <div class="img" :type="imgData.type">
                         </div>
                         <div class="msg">
                             <div v-for="(item, index) in imgData?.data" :key="index">

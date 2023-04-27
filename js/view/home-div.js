@@ -31,6 +31,7 @@ Vue.component('home-div', {
                 },
                 imgData: {
                     show: true,
+                    type: "round",
                     img: "",
                     data: ["小菲，上午好！", "最近登录时间：2022年/08/08 13:03", "明天有暴雨，记得出门带伞噢！"]
                 },
