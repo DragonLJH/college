@@ -103,9 +103,13 @@ body {
   position: absolute;
   top: 0;
   right: 0;
+  display: none;
 }
 .home-div > .main > .main-left > .item:hover {
   background-color: #f6f6f6;
+}
+.home-div > .main > .main-left > .item:hover .guanbi_jiaobiao {
+  display: inline-block;
 }
 .home-div > .main > .main-right {
   width: calc(100% - 60px);
@@ -172,8 +176,14 @@ body {
   position: relative;
   overflow: hidden;
 }
+.home-div > .main > .main-right .item .mover-div {
+  display: none;
+}
 .home-div > .main > .main-right .item.mover {
   user-select: none;
+}
+.home-div > .main > .main-right .item.mover:hover .mover-div {
+  display: inline-block;
 }
 .home-div > .main > .main-right .item > div {
   z-index: 2;
@@ -232,30 +242,33 @@ body {
   overflow: hidden auto;
   padding: 0px 10px;
 }
-.home-div > .main > .main-right .item > div > .main > .img-div {
+.home-div > .main > .main-right .item > div > .main .img-div {
   display: flex;
   align-items: center;
 }
-.home-div > .main > .main-right .item > div > .main > .img-div > .img {
+.home-div > .main > .main-right .item > div > .main .img-div > .img {
   width: 50px;
   height: 50px;
   background-color: #ccc;
   margin: 0px 10px;
 }
-.home-div > .main > .main-right .item > div > .main > .img-div > .img[type=round] {
+.home-div > .main > .main-right .item > div > .main .img-div > .img[type=round] {
   border-radius: 50%;
 }
-.home-div > .main > .main-right .item > div > .main > .img-div > .img[type=rectangle] {
+.home-div > .main > .main-right .item > div > .main .img-div > .img[type=rectangle] {
   width: 80px;
 }
-.home-div > .main > .main-right .item > div > .main > .img-div > .msg {
+.home-div > .main > .main-right .item > div > .main .img-div > .msg {
   flex: 1;
 }
-.home-div > .main > .main-right .item > div > .main > .progress {
+.home-div > .main > .main-right .item > div > .main .img-div > .first-title > div:first-child {
+  font-weight: bold;
+}
+.home-div > .main > .main-right .item > div > .main .progress {
   display: flex;
   align-items: center;
 }
-.home-div > .main > .main-right .item > div > .main > .progress > .item {
+.home-div > .main > .main-right .item > div > .main .progress > .item {
   position: relative;
   height: 18px;
   flex: 1;
@@ -268,14 +281,14 @@ body {
   color: #666;
   font-size: 12px;
 }
-.home-div > .main > .main-right .item > div > .main > .progress > .item > div {
+.home-div > .main > .main-right .item > div > .main .progress > .item > div {
   height: 1px;
   background-color: #2a2cda;
 }
-.home-div > .main > .main-right .item > div > .main > .progress > .item > span {
+.home-div > .main > .main-right .item > div > .main .progress > .item > span {
   width: 5rem;
 }
-.home-div > .main > .main-right .item > div > .main > .progress .icon {
+.home-div > .main > .main-right .item > div > .main .progress .icon {
   width: 18px;
   height: 18px;
 }

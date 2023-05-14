@@ -100,9 +100,13 @@ $home-top-background-color: #444;
                     position: absolute;
                     top: 0;
                     right: 0;
+                    display: none;
                 }
                 &:hover {
                     background-color: #f6f6f6;
+                    .guanbi_jiaobiao {
+                        display: inline-block;
+                    }
                 }
             }
         }
@@ -169,8 +173,16 @@ $home-top-background-color: #444;
                 margin: 10px;
                 position: relative;
                 overflow: hidden;
+                .mover-div{
+                    display: none ;
+                }
                 &.mover {
                     user-select: none;
+                    &:hover{
+                        .mover-div{
+                            display: inline-block ;
+                        }
+                    }
                 }
                 >div {
                     z-index: 2;
@@ -229,7 +241,7 @@ $home-top-background-color: #444;
                         height: calc(100% - 30px);
                         overflow: hidden auto;
                         padding: 0px 10px;
-                        >.img-div {
+                        .img-div {
                             display: flex;
                             align-items: center;
                             >.img {
@@ -247,8 +259,16 @@ $home-top-background-color: #444;
                             >.msg {
                                 flex: 1;
                             }
+                            >.first-title {
+                                >div{
+                                    &:first-child{
+                                        font-weight: bold;
+                                    }
+                                }
+                                
+                            }
                         }
-                        >.progress {
+                        .progress {
                             display: flex;
                             align-items: center;
                             >.item {

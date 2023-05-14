@@ -31,7 +31,7 @@ Vue.component('leibie-div', {
             <echarts-div :id="item.id" title="" title-icon="leibie" :style-object="item.style" :option="item.option" />
         </template>
         <template v-if="item.is == 'img-msg-div'">
-            <img-msg-div :id="item.id" title="" title-icon="leibie" :style-object="item.style" :option="item.option" />
+            <img-msg-div :id="item.id" :style-object="item.style" :option="item.option" />
         </template>
     </control-div>
     <div class="leibie-div-right" :style="{'--width':openR?'300px':'20px'}">
@@ -296,9 +296,10 @@ Vue.component('leibie-div', {
                 is: "img-msg-div",
                 id: 4,
                 title: "",
+                titleIcon: "",
                 style: {
                     width: 400,
-                    height: 150,
+                    height: 120,
                 }
             }]
 

@@ -35,27 +35,13 @@ Vue.component('common-div', {
         }
     },
     mounted() {
-        this.commonMsgDiv = JSON.parse(JSON.stringify(this.msgDiv))
+        this.commonMsgDiv = this.msgDiv?JSON.parse(JSON.stringify(this.msgDiv)):[]
     },
     template: `<div>
                 <title-div :title="title" :title-icon="titleIcon" />
                 <div class="main">
-                    <div class="img-div" v-if="imgData.show">
-                        <div class="img" :type="imgData.type">
-                        </div>
-                        <div class="msg">
-                            <div v-for="(item, index) in imgData?.data" :key="index">
-                                {{item}}
-                            </div> 
-                        </div>
-                    </div>
-                    <div class="progress" v-if="progress.show">
-                        <div class="item">
-                            <div :style="{width: progress.pace }"></div>
-                            <span>{{progress.pace}}({{progress.name}})</span>
-                        </div>
-                        <div class="icon shezhi"></div>
-                    </div>
+                    <img-div :img-data="imgData"></img-div>
+                    <progress-div :progress="progress"></progress-div>
                     <div class="icon-div" v-for="(item, index) in commonMsgDiv" :key="index" >
                         <div @click="iconClick(index)" class="icon " :class="item.icon" :data-num="item.msg.data.length?item.msg.data.length:''"></div>
                         <div class="msg">
