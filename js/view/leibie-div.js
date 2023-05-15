@@ -28,10 +28,10 @@ Vue.component('leibie-div', {
             <kjfw-div :title="item.title" :title-icon="item.titleIcon" :main="item.main" ></kjfw-div>
         </template>
         <template v-if="item.is == 'echarts-div'">
-            <echarts-div :id="item.id" title="" title-icon="leibie" :style-object="item.style" :option="item.option" />
+            <echarts-div :id="item.id" title="" :style-object="item.style" :option="item.option" />
         </template>
         <template v-if="item.is == 'img-msg-div'">
-            <img-msg-div :id="item.id" :style-object="item.style" :option="item.option" />
+            <img-msg-div :index="index" :id="item.id" :style-object="item.style" :img-data="item.imgData" :progress="item.progress" @target="targetProgress"  />
         </template>
     </control-div>
     <div class="leibie-div-right" :style="{'--width':openR?'300px':'20px'}">
@@ -43,13 +43,20 @@ Vue.component('leibie-div', {
                 >
             </div> 
         </div> 
-        <div class="leibie-div-right-main" v-show="openR"></div> 
+        <div class="leibie-div-right-main" v-show="openR">
+            <div>{{progressMsg.title}}</div>
+            <div v-for="(item, index) in progressMsg.data" :key="index" >
+                <div>{{item.title}}</div>
+                <div v-for="value in item.msg" :key="value" >{{value}}</div>
+            </div>
+        </div> 
     </div>
 </div>
 `,
     data() {
         return {
             openR: false,
+            progressMsg:{},
             mainItems: [{
                 is: "echarts-div",
                 id: 0,
@@ -123,7 +130,7 @@ Vue.component('leibie-div', {
                         name: 'Evaporation',
                         type: 'bar',
                         tooltip: {
-                            valueFormatter: function(value) {
+                            valueFormatter: function (value) {
                                 return value + ' ml';
                             }
                         },
@@ -134,7 +141,7 @@ Vue.component('leibie-div', {
                         name: 'Precipitation',
                         type: 'bar',
                         tooltip: {
-                            valueFormatter: function(value) {
+                            valueFormatter: function (value) {
                                 return value + ' ml';
                             }
                         },
@@ -146,7 +153,7 @@ Vue.component('leibie-div', {
                         type: 'line',
                         yAxisIndex: 1,
                         tooltip: {
-                            valueFormatter: function(value) {
+                            valueFormatter: function (value) {
                                 return value + ' °C';
                             }
                         },
@@ -211,65 +218,65 @@ Vue.component('leibie-div', {
                         data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
                     },
                     series: [{
-                            name: 'Direct',
-                            type: 'bar',
-                            stack: 'total',
-                            label: {
-                                show: true
-                            },
-                            emphasis: {
-                                focus: 'series'
-                            },
-                            data: [320, 302, 301, 334, 390, 330, 320]
+                        name: 'Direct',
+                        type: 'bar',
+                        stack: 'total',
+                        label: {
+                            show: true
                         },
-                        {
-                            name: 'Mail Ad',
-                            type: 'bar',
-                            stack: 'total',
-                            label: {
-                                show: true
-                            },
-                            emphasis: {
-                                focus: 'series'
-                            },
-                            data: [120, 132, 101, 134, 90, 230, 210]
+                        emphasis: {
+                            focus: 'series'
                         },
-                        {
-                            name: 'Affiliate Ad',
-                            type: 'bar',
-                            stack: 'total',
-                            label: {
-                                show: true
-                            },
-                            emphasis: {
-                                focus: 'series'
-                            },
-                            data: [220, 182, 191, 234, 290, 330, 310]
+                        data: [320, 302, 301, 334, 390, 330, 320]
+                    },
+                    {
+                        name: 'Mail Ad',
+                        type: 'bar',
+                        stack: 'total',
+                        label: {
+                            show: true
                         },
-                        {
-                            name: 'Video Ad',
-                            type: 'bar',
-                            stack: 'total',
-                            label: {
-                                show: true
-                            },
-                            emphasis: {
-                                focus: 'series'
-                            },
-                            data: [150, 212, 201, 154, 190, 330, 410]
+                        emphasis: {
+                            focus: 'series'
                         },
-                        {
-                            name: 'Search Engine',
-                            type: 'bar',
-                            stack: 'total',
-                            label: {
-                                show: true
-                            },
-                            emphasis: {
-                                focus: 'series'
-                            },
-                            data: [820, 832, 901, 934, 1290, 1330, 1320]
-                        }
+                        data: [120, 132, 101, 134, 90, 230, 210]
+                    },
+                    {
+                        name: 'Affiliate Ad',
+                        type: 'bar',
+                        stack: 'total',
+                        label: {
+                            show: true
+                        },
+                        emphasis: {
+                            focus: 'series'
+                        },
+                        data: [220, 182, 191, 234, 290, 330, 310]
+                    },
+                    {
+                        name: 'Video Ad',
+                        type: 'bar',
+                        stack: 'total',
+                        label: {
+                            show: true
+                        },
+                        emphasis: {
+                            focus: 'series'
+                        },
+                        data: [150, 212, 201, 154, 190, 330, 410]
+                    },
+                    {
+                        name: 'Search Engine',
+                        type: 'bar',
+                        stack: 'total',
+                        label: {
+                            show: true
+                        },
+                        emphasis: {
+                            focus: 'series'
+                        },
+                        data: [820, 832, 901, 934, 1290, 1330, 1320]
+                    }
                     ]
                 }
             }, {
@@ -295,15 +302,91 @@ Vue.component('leibie-div', {
             }, {
                 is: "img-msg-div",
                 id: 4,
-                title: "",
+                title: "卢卡斯都爱哦去外面，切",
                 titleIcon: "",
                 style: {
                     width: 400,
                     height: 120,
-                }
+                },
+                imgData: {
+                    show: true,
+                    firstTitle: true,
+                    type: "rectangle",
+                    data: ["卢卡斯都爱哦去外面，切", "离开家啊啥的"]
+                },
+                progress: {
+                    show: true,
+                    pace: "40%",
+                    name: "4/10",
+                    setting: false
+                },
+                progressMsg: [
+                    {
+                        title: "合同",
+                        msg: ["合同总金额：42,399,320", "《工业和信息化产业XXXXXXXX》"],
+                        subordinate: [
+                            {
+                                title: "发票",
+                                msg: ["应开发票总额：42,399,320", "已开发票总额：17,235,345", "未开发票总额：25,163,975"],
+                            }
+                        ]
+
+                    },
+                    {
+                        title: "合同",
+                        msg: ["合同总金额：42,399,320", "《工业和信息化产业XXXXXXXX》"],
+                        subordinate: [
+                            {
+                                title: "发票",
+                                msg: ["应开发票总额：42,399,320", "已开发票总额：17,235,345", "未开发票总额：25,163,975"],
+                            }
+                        ]
+
+                    },
+                ]
+            },{
+                is: "img-msg-div",
+                id: 5,
+                title: "气温将卢卡斯的黑科技啊啥的",
+                titleIcon: "",
+                style: {
+                    width: 400,
+                    height: 120,
+                },
+                imgData: {
+                    show: true,
+                    firstTitle: true,
+                    type: "rectangle",
+                    data: ["气温将卢卡斯的黑科技啊啥的", "离开家啊啥的"]
+                },
+                progress: {
+                    show: true,
+                    pace: "40%",
+                    name: "4/10",
+                    setting: false
+                },
+                progressMsg: [
+                    {
+                        title: "合同",
+                        msg: ["合同总金额：42,399,320", "《工业和信息化产业XXXXXXXX》"],
+                        subordinate: [
+                            {
+                                title: "发票",
+                                msg: ["应开发票总额：42,399,320", "已开发票总额：17,235,345", "未开发票总额：25,163,975"],
+                            }
+                        ]
+
+                    },
+                ]
             }]
 
         }
     },
-    methods: {}
+    methods: {
+        targetProgress(data){
+            const {title,progressMsg} = this.mainItems[data]
+            this.progressMsg = {title,data:progressMsg}
+            console.log(this.progressMsg)
+        }
+    }
 })

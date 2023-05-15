@@ -1,5 +1,8 @@
 Vue.component('img-msg-div', {
     props: {
+        index:{
+            type:Number
+        },
         imgData: {
             type: Object,
             default: () => {
@@ -62,11 +65,15 @@ Vue.component('img-msg-div', {
     },
     data: function () {
         return {}
+    }, 
+    methods: { 
+        asd(){
+            this.$emit("target", this.index)
+        }
     },
-    methods: {},
     mounted() { },
     template: `
-<div class="img-msg-div">
+<div class="img-msg-div" @click="asd">
     <title-div :title="title" :title-icon="titleIcon"/>
     <div class="main">
         <img-div :img-data="imgData">

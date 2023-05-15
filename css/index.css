@@ -247,8 +247,8 @@ body {
   align-items: center;
 }
 .home-div > .main > .main-right .item > div > .main .img-div > .img {
-  width: 50px;
-  height: 50px;
+  width: 80px;
+  height: 80px;
   background-color: #ccc;
   margin: 0px 10px;
 }
@@ -256,7 +256,7 @@ body {
   border-radius: 50%;
 }
 .home-div > .main > .main-right .item > div > .main .img-div > .img[type=rectangle] {
-  width: 80px;
+  width: 100px;
 }
 .home-div > .main > .main-right .item > div > .main .img-div > .msg {
   flex: 1;
@@ -378,6 +378,7 @@ body {
   width: 20px;
 }
 .home-div > .main > .main-right .leibie-div-right .leibie-div-right-button .button-div {
+  position: absolute;
   width: 20px;
   height: 20px;
   line-height: 20px;
@@ -389,6 +390,12 @@ body {
   box-sizing: border-box;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
+  bottom: 0;
+  left: 0;
+}
+.home-div > .main > .main-right .leibie-div-right .leibie-div-right-button .button-div:first-child {
+  bottom: 20px;
+  left: 0;
 }
 .home-div > .main > .main-right .leibie-div-right .leibie-div-right-main {
   flex: 1;
