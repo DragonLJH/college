@@ -257,7 +257,8 @@ $home-top-background-color: #444;
                                 }
                             }
                             > .msg {
-                                flex: 1;
+                                --w:0px;
+                                width: calc(100% - var(--w));
                             }
                             > .first-title {
                                 > div {
@@ -407,10 +408,56 @@ $home-top-background-color: #444;
                 .leibie-div-right-main {
                     flex: 1;
                     background-color: #fff;
+                    .leibie-div-right-main-title {
+                        display: flex;
+                        align-items: center;
+                        border-bottom: solid 1px #ccc;
+                        .leibie-div-right-main-title-img {
+                            width: 50px;
+                            height: 30px;
+                            margin: 5px;
+                            background-color: #ccc;
+                        }
+                        .leibie-div-right-main-title-msg {
+                            width: calc(100% - 60px);
+                        }
+                    }
+                    .leibie-div-right-main-msg {
+                        margin: 10px;
+                        width: calc(100% - 20px);
+                        > div {
+                            margin: 2.5px 0;
+                        }
+                        .leibie-div-right-main-msg-title {
+                            position: relative;
+                            padding-left: 20px;
+                            line-height: 20px;
+                            font-weight: bold;
+                            &::before {
+                                content: "";
+                                position: absolute;
+                                left: 7.5px;
+                                top: 0;
+                                width: 5px;
+                                height: 20px;
+                                border-radius: 5px;
+                                background-color: #ccc;
+                            }
+                        }
+                        .leibie-div-right-main-msg-main {
+                            font-size: 13px;
+                        }
+                    }
                 }
             }
         }
     }
+}
+
+.omit {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 // 新版chrome不支持 # , 需要改成%23

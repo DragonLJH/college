@@ -23,8 +23,8 @@ Vue.component('img-div', {
     template: `
 <div class="img-div" v-if="imgData.show">
     <div class="img" :type="imgData.type"></div>
-    <div class="msg " :class="imgData.firstTitle?'first-title':''">
-        <div v-for="(item, index) in imgData.data" :key="index">
+    <div class="msg" :class="imgData.firstTitle?'first-title':''" :style="{'--w':(imgData.type=='rectangle'?'100px':'80px')}">
+        <div class="omit" v-for="(item, index) in imgData.data" :key="index">
             {{item}}
         </div> 
         <slot></slot>

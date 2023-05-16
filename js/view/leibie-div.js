@@ -44,10 +44,13 @@ Vue.component('leibie-div', {
             </div> 
         </div> 
         <div class="leibie-div-right-main" v-show="openR">
-            <div>{{progressMsg.title}}</div>
-            <div v-for="(item, index) in progressMsg.data" :key="index" >
-                <div>{{item.title}}</div>
-                <div v-for="value in item.msg" :key="value" >{{value}}</div>
+            <div class="leibie-div-right-main-title">
+                <div class="leibie-div-right-main-title-img"></div>
+                <div class="leibie-div-right-main-title-msg">{{progressMsg.title}}</div>
+            </div>
+            <div class="leibie-div-right-main-msg" v-for="(item, index) in progressMsg.data" :key="index" >
+                <div class="leibie-div-right-main-msg-title" >{{item.title}}</div>
+                <div class="leibie-div-right-main-msg-main"  v-for="value in item.msg" :key="value" >{{value}}</div>
             </div>
         </div> 
     </div>
@@ -56,12 +59,12 @@ Vue.component('leibie-div', {
     data() {
         return {
             openR: false,
-            progressMsg:{},
+            progressMsg: {},
             mainItems: [{
                 is: "echarts-div",
                 id: 0,
                 style: {
-                    width: 450,
+                    width: 320,
                     height: 300,
                 },
                 title: "类别",
@@ -164,7 +167,7 @@ Vue.component('leibie-div', {
                 is: "echarts-div",
                 id: 1,
                 style: {
-                    width: 450,
+                    width: 320,
                     height: 300,
                 },
                 title: "",
@@ -190,7 +193,7 @@ Vue.component('leibie-div', {
                 is: "echarts-div",
                 id: 2,
                 style: {
-                    width: 450,
+                    width: 320,
                     height: 300,
                 },
                 title: "",
@@ -285,7 +288,7 @@ Vue.component('leibie-div', {
                 title: "",
                 titleIcon: "",
                 style: {
-                    width: 400,
+                    width: 320,
                     height: 150,
                 },
                 imgData: {
@@ -305,8 +308,8 @@ Vue.component('leibie-div', {
                 title: "卢卡斯都爱哦去外面，切",
                 titleIcon: "",
                 style: {
-                    width: 400,
-                    height: 120,
+                    width: 320,
+                    height: 150,
                 },
                 imgData: {
                     show: true,
@@ -344,14 +347,14 @@ Vue.component('leibie-div', {
 
                     },
                 ]
-            },{
+            }, {
                 is: "img-msg-div",
                 id: 5,
                 title: "气温将卢卡斯的黑科技啊啥的",
                 titleIcon: "",
                 style: {
-                    width: 400,
-                    height: 120,
+                    width: 320,
+                    height: 150,
                 },
                 imgData: {
                     show: true,
@@ -383,9 +386,9 @@ Vue.component('leibie-div', {
         }
     },
     methods: {
-        targetProgress(data){
-            const {title,progressMsg} = this.mainItems[data]
-            this.progressMsg = {title,data:progressMsg}
+        targetProgress(data) {
+            const { title, progressMsg } = this.mainItems[data]
+            this.progressMsg = { title, data: progressMsg }
             console.log(this.progressMsg)
         }
     }

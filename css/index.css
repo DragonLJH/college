@@ -259,7 +259,8 @@ body {
   width: 100px;
 }
 .home-div > .main > .main-right .item > div > .main .img-div > .msg {
-  flex: 1;
+  --w:0px;
+  width: calc(100% - var(--w));
 }
 .home-div > .main > .main-right .item > div > .main .img-div > .first-title > div:first-child {
   font-weight: bold;
@@ -400,6 +401,52 @@ body {
 .home-div > .main > .main-right .leibie-div-right .leibie-div-right-main {
   flex: 1;
   background-color: #fff;
+}
+.home-div > .main > .main-right .leibie-div-right .leibie-div-right-main .leibie-div-right-main-title {
+  display: flex;
+  align-items: center;
+  border-bottom: solid 1px #ccc;
+}
+.home-div > .main > .main-right .leibie-div-right .leibie-div-right-main .leibie-div-right-main-title .leibie-div-right-main-title-img {
+  width: 50px;
+  height: 30px;
+  margin: 5px;
+  background-color: #ccc;
+}
+.home-div > .main > .main-right .leibie-div-right .leibie-div-right-main .leibie-div-right-main-title .leibie-div-right-main-title-msg {
+  width: calc(100% - 60px);
+}
+.home-div > .main > .main-right .leibie-div-right .leibie-div-right-main .leibie-div-right-main-msg {
+  margin: 10px;
+  width: calc(100% - 20px);
+}
+.home-div > .main > .main-right .leibie-div-right .leibie-div-right-main .leibie-div-right-main-msg > div {
+  margin: 2.5px 0;
+}
+.home-div > .main > .main-right .leibie-div-right .leibie-div-right-main .leibie-div-right-main-msg .leibie-div-right-main-msg-title {
+  position: relative;
+  padding-left: 20px;
+  line-height: 20px;
+  font-weight: bold;
+}
+.home-div > .main > .main-right .leibie-div-right .leibie-div-right-main .leibie-div-right-main-msg .leibie-div-right-main-msg-title::before {
+  content: "";
+  position: absolute;
+  left: 7.5px;
+  top: 0;
+  width: 5px;
+  height: 20px;
+  border-radius: 5px;
+  background-color: #ccc;
+}
+.home-div > .main > .main-right .leibie-div-right .leibie-div-right-main .leibie-div-right-main-msg .leibie-div-right-main-msg-main {
+  font-size: 13px;
+}
+
+.omit {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .icon {
