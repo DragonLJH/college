@@ -54,11 +54,20 @@ Vue.component('leibie-div', {
             </div>
         </div> 
     </div>
+    <div>
+        <paging-div v-model="main.currently" :lines="lines" :number-of-pieces="main.numberOfPieces"></paging-div>
+    </div>
 </div>
 `,
     data() {
         return {
             openR: false,
+            main: {
+                msg: [],
+                showMsg: [],
+                numberOfPieces: 6,
+                currently: 1
+            },
             progressMsg: {},
             mainItems: [{
                 is: "echarts-div",
@@ -391,5 +400,12 @@ Vue.component('leibie-div', {
             this.progressMsg = { title, data: progressMsg }
             console.log(this.progressMsg)
         }
-    }
+    },
+    computed: {
+        lines() {
+            if(!this.main.msg.length)this.$set(this.main,"currently",0)
+            return this.main.msg.length
+        },
+
+    },
 })

@@ -257,7 +257,7 @@ $home-top-background-color: #444;
                                 }
                             }
                             > .msg {
-                                --w:0px;
+                                --w: 0px;
                                 width: calc(100% - var(--w));
                             }
                             > .first-title {
@@ -458,6 +458,26 @@ $home-top-background-color: #444;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+}
+
+.paging-div {
+    display: inline-flex;
+    border: solid 1px #ccc;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 10px;
+    padding-left: 10px;
+    overflow: hidden;
+    > .event {
+        margin-left: 15px;
+        display: flex;
+        cursor: pointer;
+        user-select: none;
+        > span:hover {
+            background-color: #333;
+            color: #fff;
+        }
+    }
 }
 
 // 新版chrome不支持 # , 需要改成%23

@@ -259,7 +259,7 @@ body {
   width: 100px;
 }
 .home-div > .main > .main-right .item > div > .main .img-div > .msg {
-  --w:0px;
+  --w: 0px;
   width: calc(100% - var(--w));
 }
 .home-div > .main > .main-right .item > div > .main .img-div > .first-title > div:first-child {
@@ -447,6 +447,26 @@ body {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+.paging-div {
+  display: inline-flex;
+  border: solid 1px #ccc;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 10px;
+  padding-left: 10px;
+  overflow: hidden;
+}
+.paging-div > .event {
+  margin-left: 15px;
+  display: flex;
+  cursor: pointer;
+  user-select: none;
+}
+.paging-div > .event > span:hover {
+  background-color: #333;
+  color: #fff;
 }
 
 .icon {
