@@ -480,6 +480,15 @@ $home-top-background-color: #444;
     }
 }
 
+#app-pop-up-div{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
 // 新版chrome不支持 # , 需要改成%23
 // 正则匹配%23.{6};{1}
 $icon-size: 12px;
