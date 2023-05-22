@@ -1,28 +1,45 @@
-var PopUpDiv = Vue.component('pop-up-div', {
-    props: {
-        a1:{
-            type:String
+
+
+var ExtendDiv = Vue.component("content-div", {
+    data() {
+        return {
+
         }
     },
-    data: function() {
-        return {}
-    },
-    methods: {},
-    mounted() {},
-    template: `
-    <div class="pop-up-div">
-    {{a1}}
-    </div>
-`
-})
+    template: `<div class="content-div">
+        <div class="title"></div>
+        <div class="main"><div id="main-item"></div></div>
+        <div class="footer">
 
-function showPopUpDiv(Component) {
-    const div = document.createElement("div")
-    div.setAttribute("id","app-pop-up-div")
-    const app = new Component().$mount()
-    app.$set(app._props,"a1","123")
-    console.log(app)
-    div.appendChild(app.$el)
-    document.body.appendChild(div)
+        </div>
+    </div>`
+})
+var MainDiv = Vue.component("main-div", {
+    props: {
+        a1: {
+            type: String
+        }
+    },
+    template: `<div class="main-div">{{a1}}--{{a1}}</div>`
+})
+function TargetDiv(component, config = {}) {
+    const attrs = Object.entries(config).map(([k, v]) => k + "=" + v)
+    const template = `<component ${attrs} is="${component}"></component>`
+    const app = Vue.extend({
+        template
+    })
+    new app().$mount("#main-item")
 }
-showPopUpDiv(PopUpDiv)
+
+function openMask(component, w = 500, h = 500, config = { a1: "asdzxaksdu" }) {
+    const app = new ExtendDiv()
+    app.$mount()
+    const div = document.createElement("div")
+    div.setAttribute("id", "mask")
+    div.setAttribute("style", `--w:${w}px;--h:${h}px`)
+    div.appendChild(app.$el)
+    document.body.append(div)
+    TargetDiv(component, config)
+
+}
+openMask("main-div")
