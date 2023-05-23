@@ -32,14 +32,17 @@
                     <span class="icon quanwenjiansuo"></span>
                 </div>
                 <div class="operate-main">
-                    <div class="item icon" @click="iconClick(item.clickStr)" :class="`${item.name} ${item.iconSize}`" v-for="(item, index) in operateIcons" :key="index"></div>
+                    <div class="item icon" @click="iconClick(item.clickStr)" :class="`${item.name} ${item.iconSize}`"
+                        v-for="(item, index) in operateIcons" :key="index"></div>
                 </div>
             </div>
         </div>
         <div class="main">
             <div class="main-left">
-                <div class="item" v-for="(item, index) in leftIcons" :key="Math.random(1)" @click="iconClicks['leftIconClick'](item.path)">
-                    <div class="icon icon-l guanbi_jiaobiao" v-show="isSetting" @click="iconClicks['leftIconClose'](index)"></div>
+                <div class="item" v-for="(item, index) in leftIcons" :key="Math.random(1)"
+                    @click="iconClicks['leftIconClick'](item.path)">
+                    <div class="icon icon-l guanbi_jiaobiao" v-show="isSetting"
+                        @click="iconClicks['leftIconClose'](index)"></div>
                     <div class="icon icon-m" :class="item.label"></div>
                 </div>
                 <div class="item" v-show="isSetting">
@@ -80,6 +83,7 @@
 <script src="./js/components/img-msg-div.js"></script>
 <script src="./js/components/paging-div.js"></script>
 <script src="./js/components/pop-up-div.js"></script>
+<script src="./js/components/mask.js"></script>
 <script>
     // 全局注册组件
     Vue.component('vuedraggable', window.vuedraggable)
@@ -112,6 +116,7 @@
                 MY: 0,
                 MW: 0,
                 MH: 0,
+                mask: null,
                 isSetting: false,
                 iconClicks: {
                     "homeSetting": () => {
@@ -120,7 +125,7 @@
                     "controlClose": (index) => {
                         let list = JSON.parse(JSON.stringify(this.styleList))
                         list.splice(index, 1)
-                            // this.styleList.splice(index, 1)
+                        // this.styleList.splice(index, 1)
                         this.styleList = list
                         console.log("controlClose", list, this.styleList, index)
                     },
@@ -155,7 +160,7 @@
                         width: 400,
                         height: 300,
                     }
-                }, ],
+                },],
                 quanwenjiansuo: "",
                 operateIcons: [{
                     name: "zaixianbangzhu",
@@ -206,10 +211,9 @@
                 }, {
                     label: "zhengcepipei",
                     path: "/zhengcepipei"
-                }, ]
+                },]
             }
         },
-
         methods: {
             iconClick(str) {
                 console.log("iconClick", str)
@@ -231,6 +235,9 @@
             changeStyleList(index) {
                 console.log("changeStyleList", index)
             },
+        },
+        created() {
+            this.mask = new Mask()
         },
         mounted() {
             this.getMainXY()

@@ -42,4 +42,4 @@ function openMask(component, w = 500, h = 500, config = { a1: "asdzxaksdu" }) {
     TargetDiv(component, config)
 
 }
-openMask("main-div")
+// openMask("main-div")

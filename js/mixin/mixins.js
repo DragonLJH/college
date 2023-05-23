@@ -18,3 +18,14 @@ var mixinSetting = {
         }
     }
 }
+
+var mixinMask = {
+    data() {
+        return {
+            mask: null
+        }
+    },
+    created() {
+        this.mask = new Mask()
+    }
+}
