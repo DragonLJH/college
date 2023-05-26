@@ -568,6 +568,109 @@ body {
   height: 100%;
 }
 
+.tabs-div {
+  --w: 600px;
+  --h: 400px;
+  width: var(--w);
+  height: var(--h);
+  box-sizing: border-box;
+  border: solid 1px #ccc;
+  overflow: hidden;
+}
+.tabs-div .tabs-div-label {
+  position: relative;
+  display: flex;
+  box-sizing: border-box;
+  border: none;
+  border-right: solid 1px #999;
+  background-color: #eee;
+}
+.tabs-div .tabs-div-label > div {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.tabs-div .tabs-div-label > div.active {
+  background-color: #fff;
+}
+.tabs-div.top .tabs-div-label {
+  height: 50px;
+}
+.tabs-div.top .tabs-div-label > div {
+  height: 100%;
+  padding: 0 10px;
+}
+.tabs-div.top .tabs-div-label > div.active {
+  transform: translateY(1px);
+  border-left: solid 1px #ccc;
+  border-right: solid 1px #ccc;
+}
+.tabs-div.top .tabs-div-main {
+  height: calc(100% - 50px);
+}
+.tabs-div.left {
+  display: flex;
+}
+.tabs-div.left .tabs-div-label {
+  width: 100px;
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
+.tabs-div.left .tabs-div-label > div {
+  width: 100%;
+  height: 50px;
+  padding: 0px 5px;
+}
+.tabs-div.left .tabs-div-label > div.active {
+  transform: translateX(1px);
+  border-top: solid 1px #ccc;
+  border-bottom: solid 1px #ccc;
+}
+.tabs-div.left .tabs-div-main {
+  width: calc(100% - 100px);
+  height: 100%;
+}
+.tabs-div .tabs-div-main {
+  height: calc(100% - 50px);
+}
+.tabs-div .tab-div {
+  --p: 10px;
+  width: calc(100% - var(--p) * 2);
+  height: calc(100% - var(--p) * 2);
+  overflow: auto;
+  padding: var(--p);
+}
+.tabs-div table {
+  width: 100%;
+  table-layout: fixed;
+  border: solid 1px #eee;
+  border-collapse: separate;
+  border-spacing: inherit;
+}
+.tabs-div table.app-table th,
+.tabs-div table.app-table td {
+  --h: 60px;
+  border: solid 1px #eee;
+  overflow: hidden;
+  box-sizing: border-box;
+  height: var(--h);
+  line-height: var(--h);
+  padding: 0 5px;
+}
+.tabs-div table.app-table th {
+  font-weight: normal;
+  width: 15%;
+  background-color: #f9f9f9;
+}
+.tabs-div table.app-table td {
+  width: 35%;
+}
+
+.tab-div {
+  width: 100%;
+  height: 100%;
+}
+
 .icon {
   display: inline-block;
   width: 24px;

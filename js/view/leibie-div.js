@@ -404,27 +404,8 @@ Vue.component('leibie-div', {
             this.parent.mask._initMask({
                 w: 1000,
                 h: 500,
-                component: "common-div",
-                config: {
-                    id: 0,
-                    title: "",
-                    titleIcon: "",
-                    style: {
-                        width: 320,
-                        height: 150,
-                    },
-                    imgData: {
-                        show: true,
-                        type: "rectangle",
-                        img: "",
-                        data: ["小菲，上午好！", "最近登录时间：2022年/08/08 13:03", "明天有暴雨，记得出门带伞噢！"]
-                    },
-                    progress: {
-                        show: true,
-                        pace: "40%",
-                        name: "4/10"
-                    },
-                }
+                component: "table-div",
+                config:{}
             })
             
         }
