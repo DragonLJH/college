@@ -16,7 +16,7 @@ Vue.component('kjfw-div', {
     methods: {},
     mounted() {},
     template: `
-<div>
+<div class="kjfw-div">
     <title-div :title="title" :title-icon="titleIcon" />
     <div class="main icons">
         <div class="icons-item" v-for="(item, index) in main" :key="index">

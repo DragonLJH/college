@@ -42,7 +42,7 @@ Vue.component('echarts-div', {
         },
     },
     template: `
-                <div>
+                <div class="echarts-div">
                     <title-div :title="title" :title-icon="titleIcon" />
                     <div class="main" :id="'echarts-main'+id"> 
                     </div>
