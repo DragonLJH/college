@@ -628,7 +628,7 @@ $home-top-background-color: #444;
 }
 
 // 遮罩层 mask
-#mask {
+.mask {
     --w: 400px;
     --h: 400px;
     position: fixed;

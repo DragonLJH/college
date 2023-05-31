@@ -39,7 +39,7 @@ class Mask {
         // 初始化弹窗框架
         const App = this._VueContentDiv()
         this._app = new App().$mount()
-        // 添加判定
+            // 添加判定
         this._first = true;
     }
 
@@ -55,14 +55,14 @@ class Mask {
 
         // 创建 遮罩层
         const div = document.createElement("div")
-        div.setAttribute("id", "mask")
+        div.setAttribute("class", "mask")
 
         // 修改弹窗框架宽高
         div.setAttribute("style", `--w:${w}px;--h:${h}px`)
 
         // 遮罩层添加关闭事件
         div.onclick = (e) => {
-            if (e.target.id == "mask") {
+            if (e.target.className == "mask") {
                 this.close()
             }
         }

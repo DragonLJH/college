@@ -482,7 +482,7 @@ body {
   background-color: rgba(0, 0, 0, 0.3);
 }
 
-#mask {
+.mask {
   --w: 400px;
   --h: 400px;
   position: fixed;
@@ -495,57 +495,57 @@ body {
   align-items: center;
   justify-content: center;
 }
-#mask .content-div {
+.mask .content-div {
   width: var(--w);
   height: var(--h);
   background-color: #fff;
   box-shadow: 0 0 10px 1px #ccc;
 }
-#mask .content-div .title {
+.mask .content-div .title {
   height: 50px;
   border-bottom: solid 1px #ccc;
   box-shadow: 0px 1px 10px 1px #ccc;
   display: flex;
   box-sizing: border-box;
 }
-#mask .content-div .title .title-msg {
+.mask .content-div .title .title-msg {
   flex: 1;
   display: flex;
   align-items: center;
   padding-left: 10px;
   font-size: 20px;
 }
-#mask .content-div .title .title-operation {
+.mask .content-div .title .title-operation {
   padding: 0 10px;
   display: flex;
   align-items: center;
   gap: 0 10px;
 }
-#mask .content-div .title .title-operation .icon {
+.mask .content-div .title .title-operation .icon {
   width: 30px;
   height: 30px;
   box-sizing: border-box;
   cursor: pointer;
 }
-#mask .content-div .title .title-operation .icon.close {
+.mask .content-div .title .title-operation .icon.close {
   display: flex;
   justify-content: center;
   align-items: center;
   border: solid 1px #ccc;
 }
-#mask .content-div .title .title-operation .icon.close:hover {
+.mask .content-div .title .title-operation .icon.close:hover {
   box-shadow: 1px 1px 1px 1px #999, 2px 2px 1px 1px #fff;
 }
-#mask .content-div .title .title-operation .icon.close::after {
+.mask .content-div .title .title-operation .icon.close::after {
   content: "X";
   display: flex;
   justify-content: center;
   align-items: center;
 }
-#mask .content-div .main {
+.mask .content-div .main {
   height: calc(100% - 100px);
 }
-#mask .content-div .footer {
+.mask .content-div .footer {
   border-top: solid 1px #ccc;
   height: 50px;
   background-color: #eee;
@@ -554,7 +554,7 @@ body {
   justify-content: space-around;
   align-items: center;
 }
-#mask .content-div .footer > div {
+.mask .content-div .footer > div {
   display: inline-block;
   padding: 5px 20px;
   border: solid 1px #ccc;
@@ -564,10 +564,10 @@ body {
   cursor: pointer;
   box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.1);
 }
-#mask .content-div .footer > div:hover {
+.mask .content-div .footer > div:hover {
   background-color: #fff;
 }
-#mask .content-div .main > div {
+.mask .content-div .main > div {
   width: 100%;
   height: 100%;
 }

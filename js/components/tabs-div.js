@@ -19,6 +19,17 @@
 // </tabs-div>
 
 var TableDiv = Vue.component("table-div", {
+    mixins: [mixinMask],
+    methods: {
+        tClick() {
+            this.mask._initMask({
+                w: 400,
+                h: 600,
+                component: Main2Div,
+                config: { a2: "a2" }
+            })
+        }
+    },
     template: `<tabs-div left>
     <template #header>
         <div style="width: 100%;height: 40px;margin:5px 10px;background-color: #000;">
@@ -76,7 +87,7 @@ var TableDiv = Vue.component("table-div", {
     <tab-div label="项目成员">项目成员 </tab-div>
     <tab-div label="项目日志">项目日志 </tab-div>
     <template #footer>
-        <div style="width: calc(100% - 10px);height: 40px;text-align: center;line-height: 40px;background-color: #f9f9f9;position: absolute;bottom: 0;left: 0;">
+        <div @click="tClick" style="width: calc(100% - 10px);height: 40px;text-align: center;line-height: 40px;background-color: #f9f9f9;position: absolute;bottom: 0;left: 0;">
             智能识别
         </div>
     </template>
