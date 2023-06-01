@@ -675,6 +675,56 @@ body {
   height: 100%;
 }
 
+.btns {
+  display: inline-block;
+  position: relative;
+  --h: 30px;
+  --b-g: 16px;
+  --f: 16px;
+}
+.btns > div {
+  padding: 0px 10px;
+  box-sizing: border-box;
+  background-color: #000;
+  color: #fff;
+  cursor: pointer;
+}
+.btns > .btns-item {
+  height: var(--h);
+  line-height: var(--h);
+  font-size: var(--f);
+}
+.btns .btns-item:hover + .btns-item-extends,
+.btns .btns-item-extends:hover {
+  display: inline-block;
+}
+.btns .btns-item-extends {
+  position: absolute;
+  top: calc(var(--h) + var(--b-g));
+  right: 0;
+  display: none;
+  width: 150%;
+  font-size: calc(var(--f) * 0.9);
+}
+.btns .btns-item-extends::after {
+  content: "";
+  position: absolute;
+  top: calc(0px - var(--b-g));
+  right: 0;
+  width: 100%;
+  height: var(--b-g);
+}
+.btns .btns-item-extends::before {
+  content: "";
+  position: absolute;
+  top: calc(0px - var(--b-g));
+  right: calc(var(--b-g) / 2);
+  border: calc(var(--b-g) / 2) solid rgba(0, 0, 0, 0);
+  border-bottom-color: #000;
+  height: var(--b-g);
+  box-sizing: border-box;
+}
+
 .icon {
   display: inline-block;
   width: 24px;

@@ -827,6 +827,56 @@ $home-top-background-color: #444;
     height: 100%;
 }
 
+.btns {
+    display: inline-block;
+    position: relative;
+    --h: 30px;
+    --b-g: 16px;
+    --f: 16px;
+    >div {
+        padding: 0px 10px;
+        box-sizing: border-box;
+        background-color: #000;
+        color: #fff;
+        cursor: pointer;
+    }
+    >.btns-item {
+        height: var(--h);
+        line-height: var(--h);
+        font-size: var(--f);
+    }
+    .btns-item:hover+.btns-item-extends,
+    .btns-item-extends:hover {
+        display: inline-block;
+    }
+    .btns-item-extends {
+        position: absolute;
+        top: calc(var(--h) + var(--b-g));
+        right: 0;
+        display: none;
+        width: 150%;
+        font-size: calc( var(--f) * 0.9);
+    }
+    .btns-item-extends::after {
+        content: "";
+        position: absolute;
+        top: calc(0px - var(--b-g));
+        right: 0;
+        width: 100%;
+        height: var(--b-g);
+    }
+    .btns-item-extends::before {
+        content: "";
+        position: absolute;
+        top: calc(0px - var(--b-g));
+        right: calc(var(--b-g) / 2);
+        border: calc(var(--b-g) / 2) solid rgba(0, 0, 0, 0);
+        border-bottom-color: #000;
+        height: var(--b-g);
+        box-sizing: border-box;
+    }
+}
+
 // 新版chrome不支持 # , 需要改成%23
 // 正则匹配%23.{6};{1}
 $icon-size: 12px;

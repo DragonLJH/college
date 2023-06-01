@@ -23,10 +23,10 @@ var TableDiv = Vue.component("table-div", {
     methods: {
         tClick() {
             this.mask._initMask({
-                w: 400,
-                h: 600,
-                component: Main2Div,
-                config: { a2: "a2" }
+                w: 1000,
+                h: 500,
+                component: "sqs-div",
+                config: {}
             })
         }
     },
