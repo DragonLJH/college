@@ -12,48 +12,48 @@ $home-top-background-color: #444;
     width: 100%;
     height: 100%;
     background-color: #eee;
-    >.top {
+    > .top {
         height: $home-top-height - 20px;
         background-color: $home-top-background-color;
         padding: 10px 20px;
         color: #fff;
         display: flex;
-        >.logo {
+        > .logo {
             position: relative;
             display: inline-block;
             width: 150px;
             height: 100%;
             background-color: #fff;
         }
-        >.main {
+        > .main {
             flex: 1;
             height: 100%;
             display: flex;
             align-items: flex-end;
             margin-left: 20px;
-            >.item {
+            > .item {
                 display: inline-flex;
                 align-items: center;
                 font-size: 12px;
                 margin: 0 5px;
-                >.home {
+                > .home {
                     width: 12px;
                     height: 12px;
                     margin: 0 5px;
                 }
             }
         }
-        >.operate {
+        > .operate {
             width: 435px;
             display: flex;
             align-items: flex-end;
-            >.search {
+            > .search {
                 width: 150px - 20px;
                 display: flex;
                 align-items: center;
                 background-color: #000;
                 padding: 0px 10px;
-                >input {
+                > input {
                     border: none;
                     margin: 0;
                     padding: 0;
@@ -67,13 +67,13 @@ $home-top-background-color: #444;
                     }
                 }
             }
-            >.operate-main {
+            > .operate-main {
                 flex: 1;
                 height: 24px;
                 text-align: right;
                 display: flex;
                 align-items: center;
-                >.item {
+                > .item {
                     margin: 0px 10px;
                     &:hover {
                         outline: solid 1px #fff;
@@ -83,13 +83,16 @@ $home-top-background-color: #444;
             }
         }
     }
-    >.main {
+    > .main {
+        --m-l-w: 75px;
         height: calc(100% - $home-top-height);
         display: flex;
-        >.main-left {
-            width: 60px;
+        > .main-left {
+            position: relative;
+            width: calc(var(--m-l-w) - 15px);
             background-color: #fff;
-            >.item {
+            margin-right: 15px;
+            > .item {
                 position: relative;
                 width: 100%;
                 height: 60px;
@@ -108,19 +111,48 @@ $home-top-background-color: #444;
                         display: inline-block;
                     }
                 }
+                &.active {
+                    justify-content:start;
+                    padding: 5px;
+                    box-sizing: border-box;
+                    gap: 5px;
+                    &::after {
+                        content: attr(data-icon);
+                    }
+                }
+            }
+            .main-left-switch {
+                position: absolute;
+                display: inline-block;
+                width: 15px;
+                height: 15px;
+                line-height: 15px;
+                text-align: center;
+                background-color: #fff;
+                right: -15px;
+                bottom: 0;
+                box-sizing: border-box;
+                &::after {
+                    content: ">";
+                }
+                &.active {
+                    &::after {
+                        content: "<";
+                    }
+                }
             }
         }
-        >.main-right {
-            width: calc(100% - 60px);
+        > .main-right {
+            width: calc(100% - var(--m-l-w));
             height: 100%;
             overflow: hidden auto;
-            >.home-div {
+            > .home-div {
                 position: relative;
                 width: 100%;
                 height: 100%;
                 overflow: hidden auto;
             }
-            >.leibie-div {
+            > .leibie-div {
                 --padding-r: 0px;
                 position: relative;
                 width: calc(100% - var(--padding-r));
@@ -140,12 +172,12 @@ $home-top-background-color: #444;
                 display: flex;
                 align-items: center;
                 justify-content: right;
-                >.search-div-item {
+                > .search-div-item {
                     border: solid 1px #999;
                     padding: 5px 10px;
                     margin: 0px 5px;
                     color: #999;
-                    >input {
+                    > input {
                         border: none;
                         margin: 0;
                         padding: 0;
@@ -161,7 +193,7 @@ $home-top-background-color: #444;
                     &:hover {
                         background-color: #333;
                         color: #fff;
-                        >input {
+                        > input {
                             color: #fff;
                         }
                     }
@@ -353,7 +385,7 @@ $home-top-background-color: #444;
                     .leibie-div-right-main-msg {
                         margin: 10px;
                         width: calc(100% - 20px);
-                        >div {
+                        > div {
                             margin: 2.5px 0;
                         }
                         .leibie-div-right-main-msg-title {
@@ -405,7 +437,7 @@ $home-top-background-color: #444;
             }
         }
     }
-    >div {
+    > div {
         z-index: 2;
         &:first-child {
             // width: calc(100% - 24px);
@@ -450,7 +482,7 @@ $home-top-background-color: #444;
             display: flex;
             align-items: flex-start;
             color: #666;
-            >.icon {
+            > .icon {
                 position: relative;
                 width: 18px;
                 height: 18px;
@@ -479,7 +511,7 @@ $home-top-background-color: #444;
                     line-height: 18px;
                     border-bottom: solid 1px #ccc;
                     display: flex;
-                    >div {
+                    > div {
                         &:first-child {
                             width: calc(100% - 72px);
                             overflow: hidden;
@@ -497,12 +529,12 @@ $home-top-background-color: #444;
         &.icons {
             display: flex;
             flex-wrap: wrap;
-            >.icons-item {
+            > .icons-item {
                 width: 60px;
                 height: 80px;
                 padding: 5px;
                 margin: 5px;
-                >div {
+                > div {
                     display: inline-flex;
                     align-items: center;
                     justify-content: center;
@@ -529,7 +561,7 @@ $home-top-background-color: #444;
     align-items: center;
     justify-content: space-between;
     padding: 0px 0px 0px 10px;
-    >.title-icon {
+    > .title-icon {
         flex: 1;
         display: flex;
         align-items: center;
@@ -544,7 +576,7 @@ $home-top-background-color: #444;
 .progress {
     display: flex;
     align-items: center;
-    >.item {
+    > .item {
         position: relative;
         height: 18px;
         flex: 1;
@@ -556,11 +588,11 @@ $home-top-background-color: #444;
         align-items: center;
         color: #666;
         font-size: 12px;
-        >div {
+        > div {
             height: 1px;
             background-color: #2a2cda;
         }
-        >span {
+        > span {
             width: 5rem;
         }
     }
@@ -573,7 +605,7 @@ $home-top-background-color: #444;
 .img-div {
     display: flex;
     align-items: center;
-    >.img {
+    > .img {
         width: 80px;
         height: 80px;
         background-color: #ccc;
@@ -585,12 +617,12 @@ $home-top-background-color: #444;
             width: 100px;
         }
     }
-    >.msg {
+    > .msg {
         --w: 0px;
         width: calc(100% - var(--w));
     }
-    >.first-title {
-        >div {
+    > .first-title {
+        > div {
             &:first-child {
                 font-weight: bold;
             }
@@ -606,12 +638,12 @@ $home-top-background-color: #444;
     border-radius: 10px;
     padding-left: 10px;
     overflow: hidden;
-    >.event {
+    > .event {
         margin-left: 15px;
         display: flex;
         cursor: pointer;
         user-select: none;
-        >span:hover {
+        > span:hover {
             background-color: #333;
             color: #fff;
         }
@@ -697,7 +729,7 @@ $home-top-background-color: #444;
             display: flex;
             justify-content: space-around;
             align-items: center;
-            >div {
+            > div {
                 display: inline-block;
                 padding: 5px 20px;
                 border: solid 1px #ccc;
@@ -712,7 +744,7 @@ $home-top-background-color: #444;
             }
         }
         .main {
-            >div {
+            > div {
                 width: 100%;
                 height: 100%;
             }
@@ -737,7 +769,7 @@ $home-top-background-color: #444;
         border: none;
         border-right: solid 1px #999;
         background-color: #eee;
-        >div {
+        > div {
             display: flex;
             align-items: center;
             cursor: pointer;
@@ -749,7 +781,7 @@ $home-top-background-color: #444;
     &.top {
         .tabs-div-label {
             height: 50px;
-            >div {
+            > div {
                 height: 100%;
                 padding: 0 10px;
                 &.active {
@@ -769,7 +801,7 @@ $home-top-background-color: #444;
             width: 100px;
             flex-wrap: wrap;
             align-content: flex-start;
-            >div {
+            > div {
                 width: 100%;
                 height: 50px;
                 padding: 0px 5px;
@@ -833,19 +865,19 @@ $home-top-background-color: #444;
     --h: 30px;
     --b-g: 16px;
     --f: 16px;
-    >div {
+    > div {
         padding: 0px 10px;
         box-sizing: border-box;
         background-color: #000;
         color: #fff;
         cursor: pointer;
     }
-    >.btns-item {
+    > .btns-item {
         height: var(--h);
         line-height: var(--h);
         font-size: var(--f);
     }
-    .btns-item:hover+.btns-item-extends,
+    .btns-item:hover + .btns-item-extends,
     .btns-item-extends:hover {
         display: inline-block;
     }
@@ -855,7 +887,7 @@ $home-top-background-color: #444;
         right: 0;
         display: none;
         width: 150%;
-        font-size: calc( var(--f) * 0.9);
+        font-size: calc(var(--f) * 0.9);
     }
     .btns-item-extends::after {
         content: "";

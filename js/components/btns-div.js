@@ -25,13 +25,13 @@ Vue.component("sqs-div", {
                     show: true,
                     firstTitle: true,
                     type: "rectangle",
-                    data: ["阿斯顿", "离开家啊啥的", "离开家啊啥的"]
+                    data: ["高新技术企业申请书", "大小：1.5M", "创建时间：2022-10-15"]
                 },
                 {
                     show: true,
                     firstTitle: true,
                     type: "rectangle",
-                    data: ["阿斯顿", "离开家啊啥的", "离开家啊啥的"]
+                    data: ["高新技术企业申请书", "大小：0.7M", "创建时间：2022-10-12"]
                 },
             ]
         }

@@ -84,12 +84,15 @@ body {
   border-radius: 5px;
 }
 .home-div > .main {
+  --m-l-w: 75px;
   height: calc(100% - 50px);
   display: flex;
 }
 .home-div > .main > .main-left {
-  width: 60px;
+  position: relative;
+  width: calc(var(--m-l-w) - 15px);
   background-color: #fff;
+  margin-right: 15px;
 }
 .home-div > .main > .main-left > .item {
   position: relative;
@@ -111,8 +114,35 @@ body {
 .home-div > .main > .main-left > .item:hover .guanbi_jiaobiao {
   display: inline-block;
 }
+.home-div > .main > .main-left > .item.active {
+  justify-content: start;
+  padding: 5px;
+  box-sizing: border-box;
+  gap: 5px;
+}
+.home-div > .main > .main-left > .item.active::after {
+  content: attr(data-icon);
+}
+.home-div > .main > .main-left .main-left-switch {
+  position: absolute;
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  line-height: 15px;
+  text-align: center;
+  background-color: #fff;
+  right: -15px;
+  bottom: 0;
+  box-sizing: border-box;
+}
+.home-div > .main > .main-left .main-left-switch::after {
+  content: ">";
+}
+.home-div > .main > .main-left .main-left-switch.active::after {
+  content: "<";
+}
 .home-div > .main > .main-right {
-  width: calc(100% - 60px);
+  width: calc(100% - var(--m-l-w));
   height: 100%;
   overflow: hidden auto;
 }

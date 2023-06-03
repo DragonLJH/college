@@ -36,15 +36,18 @@
                 </div>
             </div>
         </div>
-        <div class="main">
+        <div class="main" :style="{'--m-l-w':(mainLeftSwitch?'200px':'75px')}">
             <div class="main-left">
-                <div class="item" v-for="(item, index) in leftIcons" :key="Math.random(1)" @click="iconClicks['leftIconClick'](item.path)">
+                <div class="item" :class="mainLeftSwitch?'active':''"
+                  v-for="(item, index) in leftIcons" :key="Math.random(1)" @click="iconClicks['leftIconClick'](item.path)"
+                  :data-icon="item.label">
                     <div class="icon icon-l guanbi_jiaobiao" v-show="isSetting" @click="iconClicks['leftIconClose'](index)"></div>
                     <div class="icon icon-m" :class="item.label"></div>
                 </div>
                 <div class="item" v-show="isSetting">
                     <div class="icon icon-l jia"></div>
                 </div>
+                <div class="main-left-switch" :class="mainLeftSwitch?'active':''" @click="mainLeftSwitch = !mainLeftSwitch"></div>
             </div>
             <div class="main-right" ref="main">
                 <!-- <draggable v-model="styleList" handle=".mover" group="control-div" @start="onStart" @end="onEnd">
@@ -116,6 +119,7 @@
                 MW: 0,
                 MH: 0,
                 isSetting: false,
+                mainLeftSwitch: false,
                 iconClicks: {
                     "homeSetting": () => {
                         this.isSetting = !this.isSetting
