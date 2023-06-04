@@ -5,6 +5,7 @@ Vue.component('img-div', {
             default: () => {
                 return {
                     show: true,
+                    imgShow: true,
                     type: "",
                     data: []
                 }
@@ -22,8 +23,8 @@ Vue.component('img-div', {
     mounted() { },
     template: `
 <div class="img-div" v-if="imgData.show">
-    <div class="img" :type="imgData.type"></div>
-    <div class="msg" :class="imgData.firstTitle?'first-title':''" :style="{'--w':(imgData.type=='rectangle'?'100px':'80px')}">
+    <div class="img" :type="imgData.type" v-if="imgData.imgShow"></div>
+    <div class="msg" :class="imgData.firstTitle?'first-title':''" :style="{'--w':(imgData.imgShow?(imgData.type=='rectangle'?'100px':'80px'):'0px')}">
         <div class="omit" v-for="(item, index) in imgData.data" :key="index">
             {{item}}
         </div> 

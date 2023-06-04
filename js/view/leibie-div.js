@@ -20,20 +20,26 @@ Vue.component('leibie-div', {
             增加
         </div> 
     </div> 
-    <control-div v-for="(item, index) in mainItems" :key="item.id" v-model='item.style' :is-setting="false">
-        <template v-if="item.is == 'common-div'">
-            <common-div :img-data="item.imgData" :progress="item.progress" :title="item.title" :title-icon="item.titleIcon" :msg-div="item.msgDiv"></common-div>
-        </template>
-        <template v-if="item.is == 'kjfw-div'">
-            <kjfw-div :title="item.title" :title-icon="item.titleIcon" :main="item.main" ></kjfw-div>
-        </template>
-        <template v-if="item.is == 'echarts-div'">
-            <echarts-div :id="item.id" title="" :style-object="item.style" :option="item.option" />
-        </template>
-        <template v-if="item.is == 'img-msg-div'">
-            <img-msg-div :index="index" :id="item.id" :style-object="item.style" :img-data="item.imgData" :progress="item.progress" @target="targetProgress"  />
-        </template>
-    </control-div>
+    <div class="leibie-div-main">
+        <control-div v-for="(item, index) in mainItems" :key="item.id" v-model='item.style' :is-setting="false">
+            <template v-if="item.is == 'common-div'">
+                <common-div :img-data="item.imgData" :progress="item.progress" :title="item.title" :title-icon="item.titleIcon" :msg-div="item.msgDiv"></common-div>
+            </template>
+            <template v-if="item.is == 'kjfw-div'">
+                <kjfw-div :title="item.title" :title-icon="item.titleIcon" :main="item.main" ></kjfw-div>
+            </template>
+            <template v-if="item.is == 'echarts-div'">
+                <echarts-div :id="item.id" title="" :style-object="item.style" :option="item.option" />
+            </template>
+            <template v-if="item.is == 'img-msg-div'">
+                <img-msg-div :index="index" :id="item.id" :style-object="item.style" :img-data="item.imgData" :progress="item.progress" @target="targetProgress"  />
+            </template>
+            <template v-if="item.is == 'card-view-div'">
+                <card-view-div :title="item.title" :title-icon="item.titleIcon"  :img-data="item.imgData"></card-view-div>
+            </template>
+        </control-div>   
+    </div>
+
     <div class="leibie-div-right" :style="{'--width':openR?'300px':'20px'}">
         <div class="leibie-div-right-button">
             <div class="button-div" @click="openR = true">
@@ -302,6 +308,7 @@ Vue.component('leibie-div', {
                 },
                 imgData: {
                     show: true,
+                    imgShow: true,
                     type: "rectangle",
                     img: "",
                     data: ["小菲，上午好！", "最近登录时间：2022年/08/08 13:03", "明天有暴雨，记得出门带伞噢！"]
@@ -322,6 +329,7 @@ Vue.component('leibie-div', {
                 },
                 imgData: {
                     show: true,
+                    imgShow: true,
                     firstTitle: true,
                     type: "rectangle",
                     data: ["卢卡斯都爱哦去外面，切", "离开家啊啥的"]
@@ -368,6 +376,7 @@ Vue.component('leibie-div', {
                 imgData: {
                     show: true,
                     firstTitle: true,
+                    imgShow: true,
                     type: "rectangle",
                     data: ["气温将卢卡斯的黑科技啊啥的", "离开家啊啥的"]
                 },
@@ -390,7 +399,23 @@ Vue.component('leibie-div', {
 
                     },
                 ]
-            }]
+            }, {
+                is: "card-view-div",
+                id: 6,
+                title: "碳达峰",
+                titleIcon: "folderShare",
+                style: {
+                    width: 320,
+                    height: 150,
+                },
+                imgData: {
+                    show: true,
+                    firstTitle: true,
+                    imgShow: false,
+                    type: "rectangle",
+                    data: ["气温将卢卡斯的黑科技啊啥的", "离开家啊啥的"]
+                }
+            },]
 
         }
     },
@@ -405,9 +430,9 @@ Vue.component('leibie-div', {
                 w: 1000,
                 h: 500,
                 component: "table-div",
-                config:{}
+                config: {}
             })
-            
+
         }
     },
     computed: {

@@ -157,47 +157,14 @@ body {
   position: relative;
   width: calc(100% - var(--padding-r));
   height: calc(100% - 50px);
-  overflow: hidden auto;
+  overflow: hidden;
   padding-top: 50px;
   padding-right: var(--padding-r);
 }
-.home-div > .main > .main-right .search-div {
-  position: absolute;
-  top: 0;
-  left: 0;
-  box-sizing: border-box;
-  height: 50px;
-  width: calc(100% - 20px);
-  padding: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: right;
-}
-.home-div > .main > .main-right .search-div > .search-div-item {
-  border: solid 1px #999;
-  padding: 5px 10px;
-  margin: 0px 5px;
-  color: #999;
-}
-.home-div > .main > .main-right .search-div > .search-div-item > input {
-  border: none;
-  margin: 0;
-  padding: 0;
-  padding-left: 10px;
-  width: calc(100% - 34px);
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0);
-  color: #999;
-}
-.home-div > .main > .main-right .search-div > .search-div-item > input:focus-visible {
-  outline: none;
-}
-.home-div > .main > .main-right .search-div > .search-div-item:hover {
-  background-color: #333;
-  color: #fff;
-}
-.home-div > .main > .main-right .search-div > .search-div-item:hover > input {
-  color: #fff;
+.home-div > .main > .main-right > .leibie-div .leibie-div-main {
+  width: 100%;
+  height: calc(100% - 35px);
+  overflow: hidden auto;
 }
 .home-div > .main > .main-right .leibie-div-right {
   --width: 0px;
@@ -413,6 +380,7 @@ body {
 }
 
 .title {
+  position: relative;
   height: 29px;
   display: flex;
   align-items: center;
@@ -459,6 +427,46 @@ body {
   height: 18px;
 }
 
+.search-div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  height: 50px;
+  width: calc(100% - 20px);
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+}
+.search-div > .search-div-item {
+  border: solid 1px #999;
+  padding: 5px 10px;
+  margin: 0px 5px;
+  color: #999;
+  min-width: 2.5rem;
+}
+.search-div > .search-div-item > input {
+  border: none;
+  margin: 0;
+  padding: 0;
+  padding-left: 10px;
+  width: calc(100% - 34px);
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0);
+  color: #999;
+}
+.search-div > .search-div-item > input:focus-visible {
+  outline: none;
+}
+.search-div > .search-div-item:hover {
+  background-color: #333;
+  color: #fff;
+}
+.search-div > .search-div-item:hover > input {
+  color: #fff;
+}
+
 .img-div {
   display: flex;
   align-items: center;
@@ -501,6 +509,21 @@ body {
 .paging-div > .event > span:hover {
   background-color: #333;
   color: #fff;
+}
+
+.card-div {
+  position: relative;
+  padding: 20px 0px 0px 20px;
+  display: inline-block;
+}
+.card-div .card-div-icon {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+.card-div .card-div-icon.icon {
+  width: 18px;
+  height: 18px;
 }
 
 #app-pop-up-div {

@@ -40,7 +40,7 @@
             <div class="main-left">
                 <div class="item" :class="mainLeftSwitch?'active':''"
                   v-for="(item, index) in leftIcons" :key="Math.random(1)" @click="iconClicks['leftIconClick'](item.path)"
-                  :data-icon="item.label">
+                  :data-icon="item.value">
                     <div class="icon icon-l guanbi_jiaobiao" v-show="isSetting" @click="iconClicks['leftIconClose'](index)"></div>
                     <div class="icon icon-m" :class="item.label"></div>
                 </div>
@@ -85,7 +85,8 @@
 <script src="./js/components/paging-div.js"></script>
 <script src="./js/components/pop-up-div.js"></script>
 <script src="./js/components/tabs-div.js"></script>
-<script src="./js/components/btns-div.js"></script>
+<script src="./js/components/btns-div.js"></script> 
+<script src="./js/components/card-div.js"></script>
 <script>
     // 全局注册组件
     Vue.component('vuedraggable', window.vuedraggable)
@@ -190,27 +191,35 @@
                     clickStr: ""
                 }],
                 leftIcons: [{
+                    value: "项目",
                     label: "leibie",
                     path: "/leibie"
                 }, {
+                    value: "企业",
                     label: "kehuguanli",
                     path: "/kehuguanli"
                 }, {
+                    value: "活动",
                     label: "huodong",
                     path: "/huodong"
                 }, {
+                    value: "项目设置",
                     label: "wenjianjia_zhankai",
                     path: "/wenjianjia_zhankai"
                 }, {
+                    value: "项目类别",
                     label: "fenlei",
                     path: "/fenlei"
                 }, {
+                    value: "产业类别",
                     label: "chanyeleibie",
                     path: "/chanyeleibie"
                 }, {
+                    value: "基础设置",
                     label: "jichuguanli",
                     path: "/jichuguanli"
                 }, {
+                    value: "政策匹配",
                     label: "zhengcepipei",
                     path: "/zhengcepipei"
                 }, ]
