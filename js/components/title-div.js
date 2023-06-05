@@ -14,9 +14,9 @@ Vue.component('title-div', {
     methods: {},
     mounted() {},
     template: `
-    <div class="title" :style="{borderBottom: titleIcon?'solid 1px #ccc':'none'}">
+    <div class="title" :style="{borderBottom: titleIcon?'solid 1px #ccc':'none'}" >
         <div class="title-icon">
-            <span class="icon" :class="titleIcon"></span>{{title}}
+            <span class="icon" :class="titleIcon" v-if="titleIcon"></span>{{title}}
         </div>
         <div class="title-operate icon shezhi" @click="mixinSetting('123')"></div>
     </div>

@@ -38,9 +38,7 @@
         </div>
         <div class="main" :style="{'--m-l-w':(mainLeftSwitch?'200px':'75px')}">
             <div class="main-left">
-                <div class="item" :class="mainLeftSwitch?'active':''"
-                  v-for="(item, index) in leftIcons" :key="Math.random(1)" @click="iconClicks['leftIconClick'](item.path)"
-                  :data-icon="item.value">
+                <div class="item" :class="mainLeftSwitch?'active':''" v-for="(item, index) in leftIcons" :key="Math.random(1)" @click="iconClicks['leftIconClick'](item.path)" :data-icon="item.value">
                     <div class="icon icon-l guanbi_jiaobiao" v-show="isSetting" @click="iconClicks['leftIconClose'](index)"></div>
                     <div class="icon icon-m" :class="item.label"></div>
                 </div>
@@ -85,7 +83,7 @@
 <script src="./js/components/paging-div.js"></script>
 <script src="./js/components/pop-up-div.js"></script>
 <script src="./js/components/tabs-div.js"></script>
-<script src="./js/components/btns-div.js"></script> 
+<script src="./js/components/btns-div.js"></script>
 <script src="./js/components/card-div.js"></script>
 <script>
     // 全局注册组件
@@ -99,6 +97,88 @@
         path: '/leibie',
         component: {
             template: '<leibie-div />'
+        }
+    }, {
+        path: '/fenlei',
+        component: {
+            data() {
+                let arr = [{
+                    title: "碳达峰",
+                    data: ["国家自然科学基金委员会", "按碳达峰项目申报的相关材料进行设定的模版，可直接套用或参考标准来进···"]
+                }, {
+                    title: "招商引资",
+                    data: ["广东省商务厅", "按招商引资项目申报的相关文件标准设定，可套用相关模版建立文件。"]
+                }, {
+                    title: "高新技术企业新认定",
+                    data: ["广东省科学技术厅", "按国家申报标准设置了各项指标，及相关标准模版，可按模版直接建立多数···"]
+                }, {
+                    title: "知识产权",
+                    titleIcon: "folderShare",
+                    data: ["广东省市场监督管理局(知识产权局)", "按知识产权申请的相关申报材料，建立的文档模版，包含专利、软著及商标··"]
+                }, {
+                    title: "高新技术企业复核",
+                    data: ["广东省科学技术厅", "按国家申报标准设置了复核认定的各项指标，及相关标准模版，可按模版直·"]
+                }, {
+                    title: "人才认定与资助",
+                    data: ["广东省人力资源和社会保障厅", "人才认定所提交的申报材料设置，部分为模版自动获取，部分为参考文件"]
+                }, {
+                    title: "专精特新",
+                    data: ["广东省工业和信息化厅", "按国家专新特精项目申报的文件材料设定，可直接套用或参考。"]
+                }, {
+                    title: "配套资助",
+                    data: ["广东省工业和信息化厅", "按配套资助项目设定的几个常用模版及参考文件。"]
+                }, {
+                    title: "技术改造",
+                    data: ["广东省工业和信息化厅", "企业技术改造设备事后奖励申报单位及项目应满足的几点条件的模版文件。"]
+                }, {
+                    title: "重大项目",
+                    data: ["广东省发展和改革委员会", "经申报过的2021年度为参考模版设定的文件申报模版及成功申报的文件参考"]
+                }, ]
+                let list = arr.map((item, index) => {
+                    return {
+                        is: "card-view-div",
+                        id: index + 1,
+                        title: item.title,
+                        titleIcon: index % 3 ? (index % 2 ? 'olderOpen' : 'folderShare') : '',
+                        style: {
+                            width: 500,
+                            height: 120,
+                        },
+                        imgData: {
+                            show: true,
+                            imgShow: false,
+                            type: "rectangle",
+                            data: item.data,
+                        },
+                        progressMsg: [{
+                            icon: "folderShare",
+                            title: "工作节点",
+                            msg: ["节点数：18", "模板：8"]
+
+                        }, {
+                            icon: "folderShare",
+                            title: "模版",
+                            msg: ["《高新技术企业申报书》", "《高新技术企业认定专家组综合评价表》", "《国家高新技术企业复议申述报告》"]
+                        }, {
+                            icon: "folderShare",
+                            title: "智能获取",
+                            msg: ["《知识产权证书》", "《研发合同》", "《荣誉证书》"]
+                        }, {
+                            icon: "folderShare",
+                            title: "参考文件",
+                            msg: ["《企业近三年财务审计报告》", "《国家、省、市专精特新企业有关证明文件》", "《国家、省、市创新创业团队依托企业有关材料》"]
+                        }, {
+                            icon: "folderShare",
+                            title: "项目组成员",
+                            msg: []
+                        }],
+                    }
+                })
+                return {
+                    mainItems: list
+                }
+            },
+            template: '<leibie-div :main-items="mainItems"/>'
         }
     }]
     const router = new VueRouter({

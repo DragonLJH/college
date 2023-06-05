@@ -5,6 +5,7 @@ body {
   height: 100%;
   padding: 0;
   margin: 0;
+  overflow: hidden;
 }
 
 .home-div {
@@ -164,6 +165,9 @@ body {
 .home-div > .main > .main-right > .leibie-div .leibie-div-main {
   width: 100%;
   height: calc(100% - 35px);
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
   overflow: hidden auto;
 }
 .home-div > .main > .main-right .leibie-div-right {
@@ -200,7 +204,7 @@ body {
   left: 0;
 }
 .home-div > .main > .main-right .leibie-div-right .leibie-div-right-main {
-  flex: 1;
+  width: calc(100% - 20px);
   background-color: #fff;
 }
 .home-div > .main > .main-right .leibie-div-right .leibie-div-right-main .leibie-div-right-main-title {
@@ -226,11 +230,13 @@ body {
 }
 .home-div > .main > .main-right .leibie-div-right .leibie-div-right-main .leibie-div-right-main-msg .leibie-div-right-main-msg-title {
   position: relative;
-  padding-left: 20px;
   line-height: 20px;
   font-weight: bold;
 }
-.home-div > .main > .main-right .leibie-div-right .leibie-div-right-main .leibie-div-right-main-msg .leibie-div-right-main-msg-title::before {
+.home-div > .main > .main-right .leibie-div-right .leibie-div-right-main .leibie-div-right-main-msg .leibie-div-right-main-msg-title.default {
+  padding-left: 20px;
+}
+.home-div > .main > .main-right .leibie-div-right .leibie-div-right-main .leibie-div-right-main-msg .leibie-div-right-main-msg-title.default::before {
   content: "";
   position: absolute;
   left: 7.5px;
@@ -242,6 +248,10 @@ body {
 }
 .home-div > .main > .main-right .leibie-div-right .leibie-div-right-main .leibie-div-right-main-msg .leibie-div-right-main-msg-main {
   font-size: 13px;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .omit {
@@ -391,6 +401,7 @@ body {
   flex: 1;
   display: flex;
   align-items: center;
+  font-weight: bold;
 }
 .title .icon {
   margin-right: 10px;
@@ -514,7 +525,9 @@ body {
 .card-div {
   position: relative;
   padding: 20px 0px 0px 20px;
-  display: inline-block;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
 }
 .card-div .card-div-icon {
   position: absolute;
